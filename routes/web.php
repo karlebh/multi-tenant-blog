@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PostController;
 use App\Http\Middleware\OnlyAdminAllowed;
+use App\Http\Middleware\YouCantInteractWithOthersBlog;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -18,7 +19,7 @@ Route::group([
 });
 
 Route::group([
-    'middleware' => ['auth'],
+    'middleware' => ['auth', YouCantInteractWithOthersBlog::class],
 ], function () {
-    Route::resource('/post', PostController::class);
+    Route::resource('/{user_id}/post', PostController::class);
 });
