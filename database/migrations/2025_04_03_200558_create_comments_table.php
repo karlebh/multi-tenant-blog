@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade'); //tenant_id
             $table->foreignId('post_id')->constrained()->onDelete('cascade');
             $table->longText('content');
-            $table->json('files');
+            $table->json('files')->nullable();
             $table->timestamps();
         });
     }
