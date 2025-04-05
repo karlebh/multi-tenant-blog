@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    public function approveUser(int $id) {}
-    public function revokeUserApproval(int $id) {}
+    public function approveUser(int $user_id) {}
+    public function revokeUserApproval(int $user_id) {}
 }

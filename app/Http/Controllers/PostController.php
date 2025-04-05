@@ -3,21 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    public function index() {}
+    public function index(User $tenant) {}
 
-    public function create() {}
+    public function create(User $tenant) {}
 
-    public function store(Request $request) {}
+    public function store(Request $request, User $tenant) {}
 
-    public function show(int $id) {}
+    public function show(User $tenant) {}
 
-    public function edit(int $id) {}
+    public function edit(User $tenant) {}
 
-    public function update(Request $request, int $id) {}
+    public function update(Request $request, User $tenant) {}
 
-    public function destroy(int $id) {}
+    public function destroy(User $tenant) {}
 }
