@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
@@ -11,7 +12,8 @@ class Post extends Model
     protected $fillable = [
         'user_id',
         'title',
-        'content'
+        'content',
+        'files',
     ];
 
     protected function casts(): array
@@ -19,6 +21,11 @@ class Post extends Model
         return [
             'files' => 'collection',
         ];
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function comments(): HasMany
