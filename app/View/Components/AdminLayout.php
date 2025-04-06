@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\View\Component;
 use Illuminate\Contracts\View\View;
 
-class Tenant extends Component
+class AdminLayout extends Component
 {
     /**
      * Create a new component instance.
@@ -21,6 +21,6 @@ class Tenant extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('layouts.tenant');
+        return view('layouts.admin');
     }
 }

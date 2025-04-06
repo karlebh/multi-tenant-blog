@@ -1,8 +1,6 @@
-@extends('layouts.tenant')
+<x-app-layout>
 
-@section('title', 'Home Page')
-
-@section('content')
-    <h1>Welcome to the Home Page!</h1>
-    <p>This is some content specific to the home page.</p>
-@endsection
+    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis delectus repellat dolores dignissimos, laborum
+    officia ipsa quisquam rerum earum consequatur porro tempora nobis voluptates iusto ducimus repellendus neque, nisi
+    doloribus.
+</x-app-layout>

@@ -9,7 +9,6 @@ use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UserLoginRequest;
 use App\Models\Admin;
 use App\Models\User;
-use App\Traits\ResponseTrait;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,24 +16,14 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    public function userLoginForm()
-    {
-        return view('');
-    }
-
-    public function userRegisterForm()
-    {
-        return view('');
-    }
-
     public function adminLoginForm()
     {
-        return view('');
+        return view('auth.admin-login');
     }
 
     public function adminRegisterForm()
     {
-        return view('');
+        return view('auth.admin-register');
     }
 
     public function userRegister(CreateUserRequest $request)
@@ -50,7 +39,7 @@ class AuthController extends Controller
 
         Auth::login($user);
 
-        return redirect()->route('blogs.index', ['tenant_id' => $user->id]);
+        return redirect()->route('blogs.index', ['tenant' => $user]);
     }
 
     public function userLogin(UserLoginRequest $request)
@@ -58,40 +47,27 @@ class AuthController extends Controller
         $user = User::where('email', $request->email)
             ->first();
 
-        if (! $user || ! Hash::check($request->password, $user->password)) {
-            return redirect()->back()->with(['message' => 'This user does not exist. please register']);
-        }
-
-        if (! Auth::attempt(['email' => $user->email, 'password' => $request->password])) {
+        if (
+            ! Hash::check($request->password, $user->password) ||
+            ! Auth::attempt(['email' => $user->email, 'password' => $request->password])
+        ) {
             return redirect()->back()->with(['message' => 'Invalid credentials']);
         }
 
-        return redirect()->route('blogs.index', ['tenant_id' => $user->id]);
-    }
-
-    public function userLogout(Request $request)
-    {
-        $user = $request->user();
-
-        $user->tokens()->delete();
-
-        return redirect()->route('login');
+        return redirect()->route('blogs.index', ['tenant' => $user]);
     }
 
     public function AdminLogin(Request $request)
     {
-        $admin = Admin::where('email', $request->email)
-            ->first();
+        $credentials = $request->only('email', 'password');
 
-        if (! $admin || ! Hash::check($request->password, $admin->password)) {
-            return redirect()->back()->with(['message' => 'This admin does not exist.']);
+        if (Auth::guard('admin')->attempt($credentials)) {
+            $request->session()->regenerate();
+
+            return redirect()->route('admin.dashboard');
         }
 
-        if (! Auth::attempt(['email' => $admin->email, 'password' => $request->password])) {
-            return redirect()->back()->with(['message' => 'Invalid credentials']);
-        }
-
-        return redirect()->route('');
+        return back()->with(['message' => 'Invalid credentials.']);
     }
 
     public function AdminRegsiter(AdminRegisterRequest $request)
@@ -105,17 +81,30 @@ class AuthController extends Controller
 
         event(new Registered($admin));
 
-        Auth::login($admin);
+        Auth::guard('admin')->login($admin);
 
-        return redirect()->route('');
+        return redirect()->route('admin.dashboard');
     }
 
-    public function AdminLogout(Request $request)
+    public function logout(Request $request)
     {
-        $user = $request->user();
+        Auth::guard('web')->logout();
 
-        $user->tokens()->delete();
+        $request->session()->invalidate();
 
-        return redirect()->route('');
+        $request->session()->regenerateToken();
+
+        return redirect('/');
+    }
+
+    public function adminLogout(Request $request)
+    {
+        Auth::guard('admin')->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect()->route('admin.login');
     }
 }

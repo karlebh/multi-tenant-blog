@@ -1,3 +1,3 @@
-<x-tenant-layout>
+<x-app-layout>
 
-</x-tenant-layout>
+</x-app-layout>

@@ -2,7 +2,7 @@
     <!-- Session Status -->
 
 
-    <form method="POST" action="{{ route('user.login') }}">
+    <form method="POST" action="{{ route('admin.login') }}">
         @csrf
 
         <div class="my-3">
