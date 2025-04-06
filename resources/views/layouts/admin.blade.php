@@ -18,14 +18,7 @@
 
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
-            @include('layouts.navigation')
-
-            {{-- @if (session('message'))
-                <div class="alert alert-danger">
-                    <li class="text-green-600">{{ session('message') }}</li>
-                </div>
-            @endif --}}
-
+            @include('layouts.admin-navigation')
             <!-- Page Heading -->
             @isset($header)
                 <header class="bg-white shadow">

@@ -28,27 +28,16 @@ class PostController extends Controller
         return view('posts.index', compact('posts'));
     }
 
-    public function create(int $tenant_id)
+    public function create(User $tenant)
     {
-        $tenant = $this->findTenant($tenant_id);
-
-        if (!$tenant) {
-            return redirect()->back()->with('error', 'Tenant not found');
-        }
-
         return view('posts.create', compact('tenant'));
     }
 
-    public function store(CreatePostRequest $request, int $tenant_id)
+    public function store(CreatePostRequest $request, User $tenant)
     {
-        $tenant = $this->findTenant($tenant_id);
-
-        if (!$tenant) {
-            return redirect()->back()->with('error', 'Tenant not found');
-        }
-
         $post = Post::create([
             'user_id' => $tenant->id,
+            'blog_id' => $tenant->blog->id,
             'title' => $request->validated()['title'],
             'content' => $request->validated()['content'],
         ]);
@@ -57,7 +46,7 @@ class PostController extends Controller
             return redirect()->back()->with('error', 'Could not create post');
         }
 
-        return redirect()->route('posts.index', $tenant->id)
+        return redirect()->route('blogs.index', $tenant)
             ->with('success', 'Post created successfully');
     }
 

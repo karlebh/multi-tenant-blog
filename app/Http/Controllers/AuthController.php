@@ -8,6 +8,7 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UserLoginRequest;
 use App\Models\Admin;
+use App\Models\Blog;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -38,6 +39,8 @@ class AuthController extends Controller
         event(new Registered($user));
 
         Auth::login($user);
+
+        $user->blog()->create(['name' => $user->name . "'s blog"]);
 
         return redirect()->route('blogs.index', ['tenant' => $user]);
     }
