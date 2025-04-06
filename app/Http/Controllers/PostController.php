@@ -50,15 +50,11 @@ class PostController extends Controller
             ->with('success', 'Post created successfully');
     }
 
-    public function show(int $tenant_id, int $id)
+    public function show(User $tenant, int $id)
     {
-        $result = $this->findTenantAndPost($tenant_id, $id);
+        $post = Post::with('comments')->findOrFail($id);
 
-        if (!$result) {
-            return redirect()->back()->with('error', 'Post or Tenant not found');
-        }
-
-        return view('posts.show', compact('result'));
+        return view('posts.show')->with(['post' => $post, 'tenant' => $tenant]);
     }
 
     public function edit(int $tenant_id, int $id)

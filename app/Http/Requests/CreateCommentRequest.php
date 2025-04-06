@@ -23,10 +23,9 @@ class CreateCommentRequest extends FormRequest
     {
         return [
             'user_id'   => ['required', 'exists:users,id'],
-            'tenant_id' => ['required', 'exists:tenants,id'],
             'post_id'   => ['required', 'exists:posts,id'],
             'content'   => ['required', 'string'],
-            'files.*'     => ['file', 'mimes:jpg,png,pdf,docx', 'max:2048'],
+            'files.*'     => ['nullable', 'file', 'mimes:jpg,png,pdf,docx', 'max:2048'],
         ];
     }
 }

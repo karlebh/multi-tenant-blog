@@ -45,22 +45,13 @@ Route::get('/{tenant}/posts/{id}/edit', [PostController::class, 'edit'])->name('
 Route::put('/{tenant}/posts/{id}', [PostController::class, 'update'])->name('posts.update');
 Route::delete('/{tenant}/posts/{id}', [PostController::class, 'destroy'])->name('posts.destroy');
 
-// Route::get('{blog_id}/posts', [PostController::class, 'index'])->name('posts.index');
-// Route::get('{blog_id}/posts/create', [PostController::class, 'create'])->name('posts.create');
-// Route::post('{blog_id}/posts', [PostController::class, 'store'])->name('posts.store');
-// Route::get('{blog_id}/posts/{id}', [PostController::class, 'show'])->name('posts.show');
-// Route::get('{blog_id}/posts/{id}/edit', [PostController::class, 'edit'])->name('posts.edit');
-// Route::put('{blog_id}/posts/{id}', [PostController::class, 'update'])->name('posts.update');
-// Route::delete('{blog_id}/posts/{id}', [PostController::class, 'destroy'])->name('posts.destroy');
-
-
 Route::post('/likes', [LikeController::class, 'store'])->name('likes.store');
 Route::delete('/likes/{id}', [LikeController::class, 'destroy'])->name('likes.destroy');
 
-Route::post('/{tenant}/comment', [CommentController::class, 'store'])->name('comment.store');
-Route::get('/{tenant}/comment/{comment_id}/edit', [CommentController::class, 'edit'])->name('comment.edit');
-Route::put('/{tenant}/comment/{comment_id}', [CommentController::class, 'update'])->name('comment.update');
-Route::delete('/{tenant}/comment/{comment_id}', [CommentController::class, 'destroy'])->name('comment.destroy');
+Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
+Route::get('/comments/{comment_id}/edit', [CommentController::class, 'edit'])->name('comments.edit');
+Route::put('/comments/{comment_id}', [CommentController::class, 'update'])->name('comments.update');
+Route::delete('/comments/{comment_id}', [CommentController::class, 'destroy'])->name('comments.destroy');
 
 Route::post('/user/register', [AuthController::class, 'userRegister'])->name('user.register');
 Route::post('/user/login', [AuthController::class, 'userLogin'])->name('user.login');

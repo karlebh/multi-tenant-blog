@@ -5,7 +5,7 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}"
+                    <a href="{{ route('blogs.index', auth()->user()->id) }}"
                         class="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 hover:from-indigo-500 hover:to-yellow-500 transition duration-300">
                         Multi<span class="animate-pulse">Blog</span>
                     </a>

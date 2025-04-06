@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Post::class)->onDelete('cascade');
-            $table->foreignIdFor(User::class)->onDelete('cascade');
+            $table->foreignIdFor(User::class)->onDelete('cascade')->nullable();
+            $table->string('name')->nullable();
             $table->longText('content');
             $table->json('files')->nullable();
             $table->timestamps();

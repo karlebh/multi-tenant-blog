@@ -13,19 +13,11 @@ class CommentController extends Controller
 {
     use MethodHelper;
 
-    public function store(CreateCommentRequest $request, $tenant_id)
+    public function store(CreateCommentRequest $request)
     {
-        $tenant = $this->findTenant($tenant_id);
-
-        if (! $tenant) {
-            return redirect()->back()->with('error', 'Tenant not found');
-        }
+        // dd($request->all());
 
         $comment = Comment::create($request->validated());
-
-        if (! $comment) {
-            return redirect()->back()->with('error', 'Could not create comment');
-        }
 
         return redirect()->back()->with('success', 'Comment created successfully');
     }
