@@ -50,7 +50,7 @@ class AuthController extends Controller
 
         Auth::login($user);
 
-        return redirect()->route('');
+        return redirect()->route('blogs.index', ['tenant_id' => $user->id]);
     }
 
     public function userLogin(UserLoginRequest $request)
@@ -66,7 +66,7 @@ class AuthController extends Controller
             return redirect()->back()->with(['message' => 'Invalid credentials']);
         }
 
-        return redirect()->route('');
+        return redirect()->route('blogs.index', ['tenant_id' => $user->id]);
     }
 
     public function userLogout(Request $request)
@@ -75,7 +75,7 @@ class AuthController extends Controller
 
         $user->tokens()->delete();
 
-        return redirect()->route('');
+        return redirect()->route('login');
     }
 
     public function AdminLogin(Request $request)

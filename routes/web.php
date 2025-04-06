@@ -32,17 +32,26 @@ Route::group([
     Route::patch('/revoke-user-approval/{user_id}', [AdminController::class, 'revokeUserApproval'])->name('admin.revoke');
 });
 
-Route::get('/{tenant_id}/blogs', [BlogController::class, 'index'])->name('blog.index');
-Route::post('/{tenant_id}/blogs/edit', [BlogController::class, 'store'])->name('blog.edit');
-Route::patch('/{tenant_id}/blogs', [BlogController::class, 'destroy'])->name('blog.update');
+Route::get('/{tenant_id}/blogs', [BlogController::class, 'index'])->name('blogs.index');
+Route::post('/{tenant_id}/blogs/edit', [BlogController::class, 'store'])->name('blogs.edit');
+Route::patch('/{tenant_id}/blogs', [BlogController::class, 'destroy'])->name('blogs.update');
 
-Route::get('tenant/{tenant_id}/posts', [PostController::class, 'index'])->name('posts.index');
-Route::get('tenant/{tenant_id}/posts/create', [PostController::class, 'create'])->name('posts.create');
-Route::post('tenant/{tenant_id}/posts', [PostController::class, 'store'])->name('posts.store');
-Route::get('tenant/{tenant_id}/posts/{id}', [PostController::class, 'show'])->name('posts.show');
-Route::get('tenant/{tenant_id}/posts/{id}/edit', [PostController::class, 'edit'])->name('posts.edit');
-Route::put('tenant/{tenant_id}/posts/{id}', [PostController::class, 'update'])->name('posts.update');
-Route::delete('tenant/{tenant_id}/posts/{id}', [PostController::class, 'destroy'])->name('posts.destroy');
+Route::get('/{tenant_id}/posts', [PostController::class, 'index'])->name('posts.index');
+Route::get('/{tenant_id}/posts/create', [PostController::class, 'create'])->name('posts.create');
+Route::post('/{tenant_id}/posts', [PostController::class, 'store'])->name('posts.store');
+Route::get('/{tenant_id}/posts/{id}', [PostController::class, 'show'])->name('posts.show');
+Route::get('/{tenant_id}/posts/{id}/edit', [PostController::class, 'edit'])->name('posts.edit');
+Route::put('/{tenant_id}/posts/{id}', [PostController::class, 'update'])->name('posts.update');
+Route::delete('/{tenant_id}/posts/{id}', [PostController::class, 'destroy'])->name('posts.destroy');
+
+// Route::get('{blog_id}/posts', [PostController::class, 'index'])->name('posts.index');
+// Route::get('{blog_id}/posts/create', [PostController::class, 'create'])->name('posts.create');
+// Route::post('{blog_id}/posts', [PostController::class, 'store'])->name('posts.store');
+// Route::get('{blog_id}/posts/{id}', [PostController::class, 'show'])->name('posts.show');
+// Route::get('{blog_id}/posts/{id}/edit', [PostController::class, 'edit'])->name('posts.edit');
+// Route::put('{blog_id}/posts/{id}', [PostController::class, 'update'])->name('posts.update');
+// Route::delete('{blog_id}/posts/{id}', [PostController::class, 'destroy'])->name('posts.destroy');
+
 
 Route::post('/likes', [LikeController::class, 'store'])->name('likes.store');
 Route::delete('/likes/{id}', [LikeController::class, 'destroy'])->name('likes.destroy');

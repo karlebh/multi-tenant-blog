@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateBlogRequest;
 use App\Http\Requests\UpdateBlogRequest;
 use App\Models\Blog;
+use App\Models\Post;
 use App\Models\User;
 use App\Traits\MethodHelper;
 use Illuminate\Http\Request;
@@ -19,7 +20,9 @@ class BlogController extends Controller
         $tenant = $this->findTenant($tenant_id);
         $blogs = Blog::where('user_id', $tenant->id)->get();
 
-        return view('blogs.index', compact('blogs', 'tenant'));
+        $posts =  Post::latest()->paginate(20);
+
+        return view('blogs.index', compact('blogs', 'tenant', 'posts'));
     }
 
     public function edit(int $tenant_id, int $blog_id)

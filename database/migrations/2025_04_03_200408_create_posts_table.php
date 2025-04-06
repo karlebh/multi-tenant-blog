@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Blog;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -15,6 +16,7 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class)->onDelete('cascade');
+            $table->foreignIdFor(Blog::class)->onDelete('cascade');
             $table->string('title');
             $table->longText('content');
             $table->json('files')->nullable();
