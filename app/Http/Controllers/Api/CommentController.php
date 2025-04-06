@@ -56,24 +56,4 @@ class CommentController extends Controller
 
         return $this->successResponse('comment deleted successfully');
     }
-
-    protected function findTenantAndComment(int $tenant_id, int $comment_id)
-    {
-        $tenant = User::find($tenant_id);
-
-        if (! $tenant) {
-            return $this->notFoundResponse('This tenant does not exist');
-        }
-
-        $comment =  Comment::find($comment_id);
-
-        if (! $comment) {
-            return $this->notFoundResponse('This comment does not exist');
-        }
-
-        return [
-            'tenant' => $tenant,
-            'comment'   => $comment,
-        ];
-    }
 }

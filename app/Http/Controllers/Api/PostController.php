@@ -88,22 +88,4 @@ class PostController extends Controller
             return $this->serverErrorResponse('Server error', $exception);
         }
     }
-
-    private function findTenantAndPost(int $tenant_id, int $post_id)
-    {
-        $tenant = User::find($tenant_id);
-        if (! $tenant) {
-            return response()->json(['message' => 'This tenant does not exist'], 404);
-        }
-
-        $post = Post::find($post_id);
-        if (! $post) {
-            return response()->json(['message' => 'This post does not exist'], 404);
-        }
-
-        return [
-            'tenant' => $tenant,
-            'post'   => $post,
-        ];
-    }
 }

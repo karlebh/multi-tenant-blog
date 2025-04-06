@@ -3,11 +3,40 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateBlogRequest;
+use App\Http\Requests\UpdateBlogRequest;
+use App\Models\Blog;
 use App\Models\User;
+use App\Traits\MethodHelper;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
-    public function edit(User $tenant) {}
-    public function update(Request $request, User $tenant) {}
+    use MethodHelper;
+
+    public function index(int $tenant_id)
+    {
+        $tenant = $this->findTenant($tenant_id);
+        $blogs = Blog::where('user_id', $tenant->id)->get();
+
+        return view('blogs.index', compact('blogs', 'tenant'));
+    }
+
+    public function edit(int $tenant_id, int $blog_id)
+    {
+        $tenant = $this->findTenant($tenant_id);
+        $blog = Blog::findOrFail($blog_id);
+
+        return view('blogs.edit', compact('blog', 'tenant'));
+    }
+
+    public function update(UpdateBlogRequest $request, int $tenant_id, int $blog_id)
+    {
+        $tenant = $this->findTenant($tenant_id);
+
+        $blog = Blog::findOrFail($blog_id);
+        $blog->update($request->validated());
+
+        return redirect()->route('blogs.index', $tenant_id)->with('success', 'Blog details updated successfully');
+    }
 }

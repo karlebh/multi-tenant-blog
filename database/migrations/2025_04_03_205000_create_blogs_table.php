@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(User::class)->onDelete('cascade');
             $table->string('name')->default('Cool Blog');
-            $table->string('description')->nullable();
+            $table->string('description')->default('A cool description');
             $table->json('files')->nullable();
             $table->timestamps();
         });
