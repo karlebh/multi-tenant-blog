@@ -38,7 +38,7 @@
                             <div class="col-span-full text-center text-gray-500 py-10">
                                 No posts yet.
                                 <a href="{{ route('posts.create', $tenant) }}"
-                                    class="hover:underline text-blue-500 font-semibold">Create a post</a>
+                                    class="hover:underline text-blue-500 font-semibold underline">Create a post</a>
                             </div>
                         @endforelse
                     </div>

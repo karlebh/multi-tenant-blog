@@ -2,11 +2,12 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class CantPostUnlessApproved
+class CantManageBlogUnlessApproved
 {
     /**
      * Handle an incoming request.
@@ -15,7 +16,7 @@ class CantPostUnlessApproved
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (! $request->user()->is_approved) {
+        if ($request->user() instanceof User && ! $request->user()->is_approved) {
 
             if ($request->expectsJson()) {
                 return response()->json([

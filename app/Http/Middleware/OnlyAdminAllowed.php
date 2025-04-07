@@ -24,7 +24,7 @@ class OnlyAdminAllowed
                 ], 403);
             }
 
-            return redirect()->back();
+            return redirect()->route('blogs.index', $request->tenant);
         }
 
         return $next($request);

@@ -6,21 +6,11 @@ use App\Http\Requests\CreatePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
 use App\Models\User;
-use App\Traits\MethodHelper;
-use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    use MethodHelper;
-
-    public function index(int $tenant_id)
+    public function index(User $tenant)
     {
-        $tenant = $this->findTenant($tenant_id);
-
-        if (!$tenant) {
-            return redirect()->back()->with('error', 'Tenant not found');
-        }
-
         $posts = Post::with(['comments', 'likes', 'user'])
             ->where('user_id', $tenant->id)
             ->paginate(10);
@@ -35,11 +25,13 @@ class PostController extends Controller
 
     public function store(CreatePostRequest $request, User $tenant)
     {
+        $requestData = $request->validated();
+
         $post = Post::create([
             'user_id' => $tenant->id,
             'blog_id' => $tenant->blog->id,
-            'title' => $request->validated()['title'],
-            'content' => $request->validated()['content'],
+            'title' => $requestData['title'],
+            'content' => $requestData['content'],
         ]);
 
         if (!$post) {
@@ -50,49 +42,29 @@ class PostController extends Controller
             ->with('success', 'Post created successfully');
     }
 
-    public function show(User $tenant, int $id)
+    public function show(User $tenant, Post $post)
     {
-        $post = Post::with('comments')->findOrFail($id);
-
         return view('posts.show')->with(['post' => $post, 'tenant' => $tenant]);
     }
 
-    public function edit(int $tenant_id, int $id)
+    public function edit(User $tenant, Post $post)
     {
-        $result = $this->findTenantAndPost($tenant_id, $id);
-
-        if (!$result) {
-            return redirect()->back()->with('error', 'Post or Tenant not found');
-        }
-
-        return view('posts.edit', compact('result'));
+        return view('posts.edit')->with(['post' => $post, 'tenant' => $tenant]);
     }
 
-    public function update(UpdatePostRequest $request, int $tenant_id, int $id)
+    public function update(UpdatePostRequest $request, User $tenant, Post $post)
     {
-        $result = $this->findTenantAndPost($tenant_id, $id);
+        $post->update($request->validated());
 
-        if (!$result) {
-            return redirect()->back()->with('error', 'Post or Tenant not found');
-        }
-
-        $result['post']->update($request->validated());
-
-        return redirect()->route('posts.show', [$tenant_id, $id])
+        return redirect()->route('posts.show', [$tenant, $post])
             ->with('success', 'Post updated successfully');
     }
 
-    public function destroy(int $tenant_id, int $id)
+    public function destroy(User $tenant, Post $post)
     {
-        $result = $this->findTenantAndPost($tenant_id, $id);
+        $post->delete();
 
-        if (!$result) {
-            return redirect()->back()->with('error', 'Post or Tenant not found');
-        }
-
-        $result['post']->delete();
-
-        return redirect()->route('posts.index', $tenant_id)
+        return redirect()->route('posts.index', $tenant)
             ->with('success', 'Post deleted successfully');
     }
 }

@@ -11,53 +11,31 @@ use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
-    use MethodHelper;
-
     public function store(CreateCommentRequest $request)
     {
-        // dd($request->all());
-
         $comment = Comment::create($request->validated());
 
         return redirect()->back()->with('success', 'Comment created successfully');
     }
 
-    public function edit($tenant_id, $comment_id)
+    public function edit(User $tenant, Comment $comment)
     {
-        $result = $this->findTenantAndComment($tenant_id, $comment_id);
-
-        if (!is_array($result)) {
-            return redirect()->back()->with('error', 'Tenant or Comment not found');
-        }
-
         return view('comments.edit', [
-            'tenant' => $result['tenant'],
-            'comment' => $result['comment'],
+            'tenant' => $tenant,
+            'comment' => $comment,
         ]);
     }
 
-    public function update(UpdateCommentRequest $request, $tenant_id, $comment_id)
+    public function update(UpdateCommentRequest $request, User $tenant, Comment $comment)
     {
-        $result = $this->findTenantAndComment($tenant_id, $comment_id);
-
-        if (!is_array($result)) {
-            return redirect()->back()->with('error', 'Tenant or Comment not found');
-        }
-
-        $result['comment']->update($request->validated());
+        $comment->update($request->validated());
 
         return redirect()->back()->with('success', 'Comment updated successfully');
     }
 
-    public function destroy($tenant_id, $comment_id)
+    public function destroy(User $tenant, Comment $comment)
     {
-        $result = $this->findTenantAndComment($tenant_id, $comment_id);
-
-        if (!is_array($result)) {
-            return redirect()->back()->with('error', 'Tenant or Comment not found');
-        }
-
-        $result['comment']->delete();
+        $comment->delete();
 
         return redirect()->back()->with('success', 'Comment deleted successfully');
     }

@@ -2,11 +2,13 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Admin;
+use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class YouCantInteractWithOthersBlog
+class OnlyAdminCanManageAllBlogs
 {
     /**
      * Handle an incoming request.
@@ -15,7 +17,7 @@ class YouCantInteractWithOthersBlog
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (auth()->id() !== $request->user_id) {
+        if (auth()->user() instanceof User && auth()->id() !== $request->tenant->id) {
 
             if ($request->expectsJson()) {
                 return response()->json([
@@ -23,7 +25,7 @@ class YouCantInteractWithOthersBlog
                 ], 403);
             }
 
-            return redirect()->back();
+            return redirect()->route('blogs.index', $request->user());
         }
 
         return $next($request);
