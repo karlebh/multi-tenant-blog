@@ -120,42 +120,40 @@ class AuthController extends Controller
             return $this->serverErrorResponse('Sever error', $exception);
         }
     }
-    public function AdminRegsiter(AdminRegisterRequest $request)
+
+    public function AdminRegister(AdminRegisterRequest $request)
     {
         try {
             $admin = Admin::create([
                 'name' => $request->name,
                 'email' => $request->email,
                 'profile_photo' => $request->profile_photo,
-                'password' => Hash::make($request->string('password')),
+                'password' => Hash::make($request->password),
             ]);
 
-            if (! $admin) {
-                $this->badRequestResponse('Could not create admin');
+            if (!$admin) {
+                return $this->badRequestResponse('Could not create admin');
             }
 
             event(new Registered($admin));
-
             Auth::login($admin);
 
-            $token = $admin->createToken('API TOKEN')->plainTextToken;
+            $token = $admin->createToken('ADMIN API TOKEN', ['admin'])->plainTextToken;
             $token = $this->cleanToken($token);
 
-            return $this->successResponse("Registration successful", [
+            return $this->successResponse("Admin registration successful", [
                 'token' => $token,
-                'user' => $admin,
+                'admin' => $admin,
             ], 201);
-
-            return $this->successResponse('Admin created successfully', ['admin' => $admin]);
         } catch (\Exception $exception) {
-            return $this->serverErrorResponse('Sever error', $exception);
+            return $this->serverErrorResponse('Server error', $exception);
         }
     }
 
-    public function AdminLogout(Request $request)
+    public function AdminLogout()
     {
         try {
-            $user = $request->user();
+            $user = Auth::guard('admin')->user();
 
             $user->tokens()->delete();
 
