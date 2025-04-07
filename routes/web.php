@@ -29,26 +29,30 @@ Route::middleware('auth')->group(function () {
 
 
 Route::group([
-    'middleware' => [OnlyAdminAllowed::class, 'auth'],
+    'middleware' => [OnlyAdminAllowed::class, 'auth:admin'],
 ], function () {
     Route::post('/approve-user/{tenant}', [AdminController::class, 'approveUser'])->name('admin.approve');
     Route::post('/revoke-user-approval/{tenant}', [AdminController::class, 'revokeUserApproval'])->name('admin.revoke');
+    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 });
 
-Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard')->middleware('auth:admin');
+Route::group([
+    'middleware' => 'guest'
+], function () {
+    Route::get('/admin/login', [AuthController::class, 'adminLoginForm'])->name('admin.login.form');
+    Route::get('/admin/register', [AuthController::class, 'adminRegisterForm'])->name('admin.register.form');
+    Route::post('/admin/register', [AuthController::class, 'AdminRegsiter'])->name('admin.register');
+    Route::post('/admin/login', [AuthController::class, 'AdminLogin'])->name('admin.login');
 
-Route::get('/admin/login', [AuthController::class, 'adminLoginForm'])->name('admin.login.form');
-Route::get('/admin/register', [AuthController::class, 'adminRegisterForm'])->name('admin.register.form');
-Route::post('/admin/register', [AuthController::class, 'AdminRegsiter'])->name('admin.register');
-Route::post('/admin/login', [AuthController::class, 'AdminLogin'])->name('admin.login');
+    Route::post('/user/register', [AuthController::class, 'userRegister'])->name('user.register');
+    Route::post('/user/login', [AuthController::class, 'userLogin'])->name('user.login');
+});
 
-
-Route::post('/user/register', [AuthController::class, 'userRegister'])->name('user.register');
-Route::post('/user/login', [AuthController::class, 'userLogin'])->name('user.login');
-Route::post('/logout', [AuthController::class, 'logout'])->name('user.logout');
+Route::post('/logout', [AuthController::class, 'logout'])->name('user.logout')->middleware('auth');
+Route::post('/admin/logout', [AuthController::class, 'adminLogout'])->name('admin.logout')->middleware('auth:admin');
 
 Route::group([
-    'middleware' => [OnlyAdminCanManageAllBlogs::class]
+    'middleware' => [OnlyAdminCanManageAllBlogs::class, 'auth']
 ], function () {
     Route::get('/{tenant}/blogs', [BlogController::class, 'index'])->name('blogs.index');
     Route::get('/{tenant}/posts', [PostController::class, 'index'])->name('posts.index');
@@ -65,7 +69,7 @@ Route::group([
         Route::delete('/{tenant}/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
 
         Route::post('/likes', [LikeController::class, 'store'])->name('likes.store');
-        Route::delete('/likes/{id}', [LikeController::class, 'destroy'])->name('likes.destroy');
+        Route::delete('/likes/{like}', [LikeController::class, 'destroy'])->name('likes.destroy');
 
         Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
         Route::get('/comments/{comment}/edit', [CommentController::class, 'edit'])->name('comments.edit');
@@ -73,4 +77,6 @@ Route::group([
         Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
     });
 });
+
+
 require __DIR__ . '/auth.php';

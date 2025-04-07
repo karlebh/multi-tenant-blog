@@ -7,14 +7,14 @@ use App\Http\Requests\CreatePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
 use App\Models\User;
-use App\Traits\MethodHelper;
+use App\Traits\MethodTrait;
 use App\Traits\ResponseTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 class PostController extends Controller
 {
-    use MethodHelper, ResponseTrait;
+    use MethodTrait, ResponseTrait;
 
     public function index(int $tenant_id)
     {

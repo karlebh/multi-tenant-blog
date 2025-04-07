@@ -17,7 +17,9 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
+
     use ResponseTrait;
+
     public function userRegister(CreateUserRequest $request)
     {
         try {

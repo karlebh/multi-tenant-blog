@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Traits\MethodHelper;
+use App\Traits\MethodTrait;
 use App\Traits\ResponseTrait;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    use MethodHelper, ResponseTrait;
+    use MethodTrait, ResponseTrait;
 
     public function approveUser(int $user_id)
     {

@@ -7,13 +7,13 @@ use App\Http\Requests\CreateBlogRequest;
 use App\Http\Requests\UpdateBlogRequest;
 use App\Models\Blog;
 use App\Models\User;
-use App\Traits\MethodHelper;
+use App\Traits\MethodTrait;
 use App\Traits\ResponseTrait;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
-    use ResponseTrait, MethodHelper;
+    use ResponseTrait, MethodTrait;
 
     public function store(CreateBlogRequest $request, int $tenant_id)
     {

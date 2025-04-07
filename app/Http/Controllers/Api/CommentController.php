@@ -8,14 +8,14 @@ use App\Http\Requests\UpdateCommentRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Comment;
 use App\Models\User;
-use App\Traits\MethodHelper;
+use App\Traits\MethodTrait;
 use App\Traits\ResponseTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 class CommentController extends Controller
 {
-    use ResponseTrait, MethodHelper;
+    use ResponseTrait, MethodTrait;
 
     public function store(CreateCommentRequest $request, $tenant_id)
     {

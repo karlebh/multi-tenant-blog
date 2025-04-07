@@ -24,7 +24,7 @@ class LikeController extends Controller
         $likeType = $models[$request->likeable_type];
 
         $like = Like::create([
-            'user_id' => auth()->id(),
+            'user_id' => auth()->id() ?? null,
             'likeable_id' => $request->likeable_id,
             'likeable_type' => $likeType,
         ]);
@@ -32,14 +32,8 @@ class LikeController extends Controller
         return redirect()->back()->with('success', 'Like created successfully');
     }
 
-    public function destroy($id)
+    public function destroy(Like $like)
     {
-        $like = Like::find($id);
-
-        if (! $like) {
-            return redirect()->back()->with('error', 'Like not found');
-        }
-
         $like->delete();
 
         return redirect()->back()->with('success', 'Like deleted successfully');
