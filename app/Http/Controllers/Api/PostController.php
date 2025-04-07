@@ -31,6 +31,7 @@ class PostController extends Controller
 
     public function store(CreatePostRequest $request, int $tenant_id)
     {
+        return $tenant_id;
         try {
             $tenant =  $this->findTenant($tenant_id);
 

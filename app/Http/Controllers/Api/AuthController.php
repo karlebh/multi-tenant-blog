@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AdminLoginRequest;
 use App\Http\Requests\AdminRegisterRequest;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\CreateUserRequest;
@@ -93,35 +94,29 @@ class AuthController extends Controller
         }
     }
 
-    public function AdminLogin(Request $request)
+    public function adminLogin(AdminLoginRequest $request)
     {
         try {
-            $admin = Admin::where('email', $request->email)
-                ->first();
-
-            if (! $admin || ! Hash::check($request->password, $admin->password)) {
-                return $this->notFoundResponse('This admin does not exist. please register');
-            }
-
-            if (! Auth::attempt(['email' => $admin->email, 'password' => $request->password])) {
+            if (!Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password])) {
                 return $this->badRequestResponse('Invalid credentials', 403);
             }
 
-            $token =
-                $this->cleanToken(
-                    $admin->createToken($admin->email)->plainTextToken
-                );
+            $admin = Admin::where('email', $request->email)->first();
+
+            $token = $this->cleanToken(
+                $admin->createToken($admin->email)->plainTextToken
+            );
 
             return $this->successResponse('Login successful', [
                 'token' => $token,
                 'admin' => $admin
             ]);
         } catch (\Exception $exception) {
-            return $this->serverErrorResponse('Sever error', $exception);
+            return $this->serverErrorResponse('Server error', $exception);
         }
     }
 
-    public function AdminRegister(AdminRegisterRequest $request)
+    public function adminRegister(AdminRegisterRequest $request)
     {
         try {
             $admin = Admin::create([
@@ -150,7 +145,7 @@ class AuthController extends Controller
         }
     }
 
-    public function AdminLogout()
+    public function adminLogout()
     {
         try {
             $user = Auth::guard('admin')->user();

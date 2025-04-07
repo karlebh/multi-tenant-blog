@@ -14,10 +14,13 @@ class BlogFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition(): array
+    public function definition()
     {
         return [
-            //
+            'user_id' => \App\Models\User::factory(),
+            'name' => $this->faker->sentence(4),
+            'files' => json_encode([$this->faker->imageUrl(), $this->faker->imageUrl()]),
+            'description' => $this->faker->paragraph(3),
         ];
     }
 }

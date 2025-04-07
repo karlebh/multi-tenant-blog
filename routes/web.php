@@ -51,6 +51,14 @@ Route::group([
 Route::post('/logout', [AuthController::class, 'logout'])->name('user.logout')->middleware('auth');
 Route::post('/admin/logout', [AuthController::class, 'adminLogout'])->name('admin.logout')->middleware('auth:admin');
 
+Route::post('/likes', [LikeController::class, 'store'])->name('likes.store');
+Route::delete('/likes/{like}', [LikeController::class, 'destroy'])->name('likes.destroy');
+
+Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
+Route::get('/comments/{comment}/edit', [CommentController::class, 'edit'])->name('comments.edit');
+Route::put('/comments/{comment}', [CommentController::class, 'update'])->name('comments.update');
+Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
+
 Route::group([
     'middleware' => [OnlyAdminCanManageAllBlogs::class, 'auth']
 ], function () {
@@ -67,14 +75,6 @@ Route::group([
         Route::get('/{tenant}/posts/{post}/edit', [PostController::class, 'edit'])->name('posts.edit');
         Route::put('/{tenant}/posts/{post}', [PostController::class, 'update'])->name('posts.update');
         Route::delete('/{tenant}/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
-
-        Route::post('/likes', [LikeController::class, 'store'])->name('likes.store');
-        Route::delete('/likes/{like}', [LikeController::class, 'destroy'])->name('likes.destroy');
-
-        Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
-        Route::get('/comments/{comment}/edit', [CommentController::class, 'edit'])->name('comments.edit');
-        Route::put('/comments/{comment}', [CommentController::class, 'update'])->name('comments.update');
-        Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
     });
 });
 
