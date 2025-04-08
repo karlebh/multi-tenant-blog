@@ -27,7 +27,38 @@
                     <!-- Post Content -->
                     <div class="prose lg:prose-xl text-gray-700">
                         <p>{{ $post->content }}</p>
+
+
                     </div>
+
+                    <div class="my-5 space-x-5">
+                        <a href="{{ route('posts.edit', [$tenant, $post]) }}" class="text-blue-600 underline">edit
+                            post</a>
+
+                        <div x-data="{ liked: false, count: 0 }" class="inline">
+                            <!-- Like Button -->
+                            <button @click="liked = !liked; count = liked ? count + 1 : count - 1"
+                                class="text-blue-500 underline">
+                                <span x-text="liked ? 'Liked' : 'Like'"></span>
+                            </button>
+
+                            <!-- Like Count -->
+                            <span class="ml-2" x-text="count"></span>
+                        </div>
+
+                    </div>
+
+                    @if ($post->files)
+                        <div class="grid grid-cols-2 gap-4 mt-4">
+                            @foreach ($post->files as $file)
+                                <div>
+                                    <img src="{{ asset('storage/' . $file) }}" alt="Uploaded file"
+                                        class="w-full rounded shadow">
+                                </div>
+                            @endforeach
+                        </div>
+                    @endif
+
 
                     <div class="mt-8">
                         <h3 class="text-xl font-semibold text-gray-800">Comments</h3>

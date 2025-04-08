@@ -18,6 +18,12 @@
 
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
+            @if (!auth()->user()->is_approved)
+                <div class="bg-red-600 px-20 py-2 text-md font-semibold text-white">You are not approved yet. You
+                    actions
+                    are limited
+                </div>
+            @endif
             @include('layouts.navigation')
 
             {{-- @if (session('message'))
@@ -27,6 +33,9 @@
             @endif --}}
 
             <!-- Page Heading -->
+
+
+
             @isset($header)
                 <header class="bg-white shadow">
                     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">

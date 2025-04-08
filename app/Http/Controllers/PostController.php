@@ -6,9 +6,12 @@ use App\Http\Requests\CreatePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
 use App\Models\User;
+use App\Traits\MethodTrait;
 
 class PostController extends Controller
 {
+    use MethodTrait;
+
     public function index(User $tenant)
     {
         $posts = Post::with(['comments', 'likes', 'user'])
@@ -38,6 +41,10 @@ class PostController extends Controller
             return redirect()->back()->with('error', 'Could not create post');
         }
 
+        $processedFiles = $this->processFiles($request);
+
+        $post->update(['files' => $processedFiles]);
+
         return redirect()->route('blogs.index', $tenant)
             ->with('success', 'Post created successfully');
     }
@@ -55,6 +62,17 @@ class PostController extends Controller
     public function update(UpdatePostRequest $request, User $tenant, Post $post)
     {
         $post->update($request->validated());
+
+        $processedFiles = $this->processFiles($request);
+
+        $mergedFiles = array_merge(
+            $post->files ?? [],
+            $processedFiles
+        );
+
+        $post->update([
+            'files' => $mergedFiles
+        ]);
 
         return redirect()->route('posts.show', [$tenant, $post])
             ->with('success', 'Post updated successfully');

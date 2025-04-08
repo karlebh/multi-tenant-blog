@@ -31,7 +31,7 @@ class PostController extends Controller
 
     public function store(CreatePostRequest $request, int $tenant_id)
     {
-        return $tenant_id;
+        // return $tenant_id;
         try {
             $tenant =  $this->findTenant($tenant_id);
 
@@ -41,12 +41,15 @@ class PostController extends Controller
                 'user_id' => $tenant->id,
                 'title' => $requestData['title'],
                 'content' => $requestData['content'],
-                // 'files' => $requestData['files'],
             ]);
 
             if (! $post) {
                 return $this->badRequestResponse('Could not create post');
             }
+
+            $processedFiles = $this->processFiles($request);
+
+            $post->update(['files' => $processedFiles]);
 
             return $this->successResponse('Post created succesfully', ['post' => $post]);
         } catch (\Exception $exception) {
@@ -70,6 +73,17 @@ class PostController extends Controller
             $result = $this->findTenantAndPost($tenant_id, $id);
 
             $result['post']->update([$request->validated()]);
+
+            $processedFiles = $this->processFiles($request);
+
+            $mergedFiles = array_merge(
+                $post->files ?? [],
+                $processedFiles
+            );
+
+            $result['post']->update([
+                'files' => $mergedFiles
+            ]);
 
             $this->successResponse('Post updated succesfully', ['post' => $result['post']->fresh()]);
         } catch (\Exception $exception) {

@@ -13,7 +13,7 @@ trait MethodTrait
 {
     use ResponseTrait;
 
-    public function upload(Request $request): array
+    public function processFiles(Request $request): array
     {
         $request->validate([
             'files.*' => [
@@ -25,21 +25,30 @@ trait MethodTrait
         ]);
 
         $storedFiles = [];
-        $uploadId = time() . Str::random(10);
 
         if ($request->hasFile('files')) {
             foreach ($request->file('files') as $file) {
 
-                $folder =  uniqid(true);
                 $fileName = Str::random(10) . '-' . $file->getClientOriginalName();
 
-                $path = $file->storeAs("uploads/{$folder}", $fileName, 'public');
+                $path = $file->storeAs("uploads", str_replace(' ', '', $fileName), 'public');
 
                 $storedFiles[] = $path;
             }
         }
 
         return $storedFiles;
+    }
+
+    public function getFilesArray($files)
+    {
+        if (is_array($files)) {
+            return $files;
+        } elseif (is_string($files)) {
+            return json_decode($files, true) ?? [];
+        }
+
+        return [];
     }
 
     private function findTenant(int $tenant_id)

@@ -23,7 +23,7 @@ class Post extends Model
     protected function casts(): array
     {
         return [
-            'files' => 'collection',
+            'files' => 'array',
         ];
     }
 

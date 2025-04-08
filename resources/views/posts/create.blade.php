@@ -26,7 +26,7 @@
                         <!-- File Upload -->
                         <div class="mt-4">
                             <x-input-label for="files" :value="__('Upload File')" />
-                            <x-text-input id="files" class="block mt-1 w-full" type="file" name="files" />
+                            <input id="files" class="block mt-1 w-full" type="file" name="files[]" multiple />
                             <x-input-error :messages="$errors->get('files')" class="mt-2" />
                         </div>
 

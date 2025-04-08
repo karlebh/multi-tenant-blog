@@ -7,9 +7,12 @@ use App\Http\Requests\UpdateBlogRequest;
 use App\Models\Blog;
 use App\Models\Post;
 use App\Models\User;
+use App\Traits\MethodTrait;
 
 class BlogController extends Controller
 {
+    use MethodTrait;
+
     public function index(User $tenant)
     {
         $blogs = Blog::where('user_id', $tenant->id)->get();
