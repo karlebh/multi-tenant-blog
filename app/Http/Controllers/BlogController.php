@@ -19,17 +19,30 @@ class BlogController extends Controller
 
         $posts =  Post::where('user_id', $tenant->id)->latest()->paginate(20);
 
-        return view('blogs.index', compact('blogs', 'tenant', 'posts'));
+        return view('blogs.index', [
+            'blogs' => $blogs,
+            'tenant' => $tenant,
+            'posts' => $posts,
+        ]);
     }
 
     public function edit(User $tenant, Blog $blog)
     {
-        return view('blogs.edit', compact('blog', 'tenant'));
+        return view('blogs.edit', [
+            'blog' => $blog,
+            'tenant' => $tenant,
+        ]);
     }
 
     public function update(UpdateBlogRequest $request, User $tenant, Blog $blog)
     {
         $blog->update($request->validated());
+
+        $processedFile = $this->processFiles($request);
+
+        $blog->update([
+            'files' => $processedFile,
+        ]);
 
         return redirect()->route('blogs.index', $tenant->id)->with('success', 'Blog details updated successfully');
     }

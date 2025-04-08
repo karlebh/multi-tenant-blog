@@ -19,8 +19,8 @@ Route::get('/', function () {
 Route::group([
     'middleware' => [OnlyAdminAllowed::class, 'ability:admin'],
 ], function () {
-    Route::patch('/approve-user/{user_id}', [AdminController::class, 'approveUser'])->name('admin.approve');
-    Route::patch('/revoke-user-approval/{user_id}', [AdminController::class, 'revokeUserApproval'])->name('admin.revoke');
+    Route::patch('/approve-user/{user_id}', [AdminController::class, 'approveUser']);
+    Route::patch('/revoke-user-approval/{user_id}', [AdminController::class, 'revokeUserApproval']);
 });
 
 Route::post('/admin/logout', [AuthController::class, 'adminLogout'])->middleware('ability:admin');
@@ -33,12 +33,12 @@ Route::group(['middleware' => APIGuest::class], function () {
     Route::post('/admin/register', [AuthController::class, 'adminRegister']);
 });
 
-Route::post('/likes', [LikeController::class, 'store'])->name('likes.store');
-Route::delete('/likes/{id}', [LikeController::class, 'destroy'])->name('likes.destroy');
+Route::post('/likes', [LikeController::class, 'store']);
+Route::delete('/likes/{id}', [LikeController::class, 'destroy']);
 
-Route::post('/{tenant_id}/comments', [CommentController::class, 'store'])->name('comment.store');
-Route::patch('/{tenant_id}/comments/{post_id}', [CommentController::class, 'update'])->name('comment.update');
-Route::delete('/{tenant_id}/comments/{post_id}', [CommentController::class, 'destroy'])->name('comment.destroy');
+Route::post('/{tenant_id}/comments', [CommentController::class, 'store']);
+Route::patch('/{tenant_id}/comments/{post_id}', [CommentController::class, 'update']);
+Route::delete('/{tenant_id}/comments/{post_id}', [CommentController::class, 'destroy']);
 
 Route::group(['middleware' => [
     'auth:sanctum',
@@ -46,12 +46,12 @@ Route::group(['middleware' => [
     OnlyAdminCanManageAllBlogs::class,
     // 'ability:admin'
 ]], function () {
-    Route::get('/{tenant_id}/posts', [PostController::class, 'index'])->name('post.index');
-    Route::get('/{tenant_id}/posts/{post_id}', [PostController::class, 'show'])->name('post.show');
-    Route::post('/{tenant_id}/posts', [PostController::class, 'store'])->name('post.store');
-    Route::patch('/{tenant_id}/posts/{post_id}', [PostController::class, 'update'])->name('post.update');
-    Route::delete('/{tenant_id}/posts/{post_id}', [PostController::class, 'destroy'])->name('post.destroy');
+    Route::get('/{tenant_id}/posts', [PostController::class, 'index']);
+    Route::get('/{tenant_id}/posts/{post_id}', [PostController::class, 'show']);
+    Route::post('/{tenant_id}/posts', [PostController::class, 'store']);
+    Route::patch('/{tenant_id}/posts/{post_id}', [PostController::class, 'update']);
+    Route::delete('/{tenant_id}/posts/{post_id}', [PostController::class, 'destroy']);
 
-    Route::post('/{tenant_id}/blogs/edit', [BlogController::class, 'store'])->name('blog.edit');
-    Route::patch('/{tenant_id}/blogs', [BlogController::class, 'destroy'])->name('blog.update');
+    Route::post('/{tenant_id}/blogs/edit', [BlogController::class, 'store']);
+    Route::patch('/{tenant_id}/blogs', [BlogController::class, 'destroy']);
 });

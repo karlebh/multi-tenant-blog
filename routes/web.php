@@ -1,14 +1,13 @@
 <?php
 
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\API\LikeController;
+use App\Http\Controllers\LikeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Middleware\CantManageBlogUnlessApproved;
-use App\Http\Middleware\CantPostUnlessApproved;
 use App\Http\Middleware\OnlyAdminAllowed;
 use App\Http\Middleware\OnlyAdminCanManageAllBlogs;
 use Illuminate\Support\Facades\Route;
@@ -51,8 +50,7 @@ Route::group([
 Route::post('/logout', [AuthController::class, 'logout'])->name('user.logout')->middleware('auth');
 Route::post('/admin/logout', [AuthController::class, 'adminLogout'])->name('admin.logout')->middleware('auth:admin');
 
-Route::post('/likes', [LikeController::class, 'store'])->name('likes.store');
-Route::delete('/likes/{like}', [LikeController::class, 'destroy'])->name('likes.destroy');
+Route::post('/likes/{owner}', [LikeController::class, 'toggle'])->name('likes.toggle');
 
 Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
 Route::get('/comments/{comment}/edit', [CommentController::class, 'edit'])->name('comments.edit');
@@ -66,8 +64,8 @@ Route::group([
     Route::get('/{tenant}/posts', [PostController::class, 'index'])->name('posts.index');
 
     Route::middleware(CantManageBlogUnlessApproved::class)->group(function () {
-        Route::post('/{tenant}/blogs/edit', [BlogController::class, 'store'])->name('blogs.edit');
-        Route::patch('/{tenant}/blogs/{blog}', [BlogController::class, 'destroy'])->name('blogs.update');
+        Route::get('/{tenant}/blogs/{blog}/edit', [BlogController::class, 'edit'])->name('blogs.edit');
+        Route::put('/{tenant}/blogs/{blog}', [BlogController::class, 'update'])->name('blogs.update');
 
         Route::get('/{tenant}/posts/create', [PostController::class, 'create'])->name('posts.create');
         Route::get('/{tenant}/posts/{post}', [PostController::class, 'show'])->name('posts.show');

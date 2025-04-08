@@ -23,8 +23,6 @@ class UpdateBlogRequest extends FormRequest
     {
         return [
             'name'        => ['required', 'string', 'max:255'],
-            'files'       => ['nullable', 'array'],
-            'files.*'     => ['file', 'mimes:jpg,png,pdf,docx', 'max:2048'],
             'description' => ['nullable', 'string'],
         ];
     }

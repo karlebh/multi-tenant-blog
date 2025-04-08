@@ -22,8 +22,13 @@ class LikeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'likeable_id' => ['required', 'integer'],
-            'likeable_type' => ['required', 'string', 'in:comment,post'],
+            'likeable_id' => [
+                'required',
+                'integer',
+            ],
+            'likeable_type' => [
+                'required',
+            ],
         ];
     }
 }

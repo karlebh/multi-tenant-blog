@@ -35,15 +35,24 @@
                         <a href="{{ route('posts.edit', [$tenant, $post]) }}" class="text-blue-600 underline">edit
                             post</a>
 
-                        <div x-data="{ liked: false, count: 0 }" class="inline">
-                            <!-- Like Button -->
-                            <button @click="liked = !liked; count = liked ? count + 1 : count - 1"
-                                class="text-blue-500 underline">
-                                <span x-text="liked ? 'Liked' : 'Like'"></span>
-                            </button>
+                        <div class="inline space-x-7">
 
-                            <!-- Like Count -->
-                            <span class="ml-2" x-text="count"></span>
+                            <form action="{{ route('likes.toggle', $post) }}" method="POST" style="display: inline;">
+                                @csrf
+                                <input type="hidden" name="likeable_id" value="{{ $post->id }}">
+                                <input type="hidden" name="likeable_type" value="{{ $post::class }}">
+                                <button type="submit">Like</button>
+                            </form>
+
+                            @auth
+                                <form action="{{ route('likes.toggle', $post) }}" method="POST" style="display: inline;">
+                                    @csrf
+                                    <input type="hidden" name="likeable_id" value="{{ $post->id }}">
+                                    <input type="hidden" name="likeable_type" value="{{ $post::class }}">
+                                    <button type="submit">Unlike</button>
+                                </form>
+                            @endauth
+
                         </div>
 
                     </div>

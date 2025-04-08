@@ -18,10 +18,14 @@
 
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
-            @if (!auth()->user()->is_approved)
-                <div class="bg-red-600 px-20 py-2 text-md font-semibold text-white">You are not approved yet. You
-                    actions
-                    are limited
+            @if (!Auth::user()->is_approved)
+                <div class="bg-red-600">
+                    <div
+                        class="bg-red-600 px-20 py-2 text-md font-semibold text-white max-w-7xl mx-auto sm:px-6 lg:px-8">
+                        You are not approved yet. You
+                        actions
+                        are limited
+                    </div>
                 </div>
             @endif
             @include('layouts.navigation')
