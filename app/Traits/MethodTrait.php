@@ -40,17 +40,6 @@ trait MethodTrait
         return $storedFiles;
     }
 
-    public function getFilesArray($files)
-    {
-        if (is_array($files)) {
-            return $files;
-        } elseif (is_string($files)) {
-            return json_decode($files, true) ?? [];
-        }
-
-        return [];
-    }
-
     private function findTenant(int $tenant_id)
     {
         $tenant =  User::find($tenant_id);
