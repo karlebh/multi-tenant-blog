@@ -15,6 +15,10 @@ class AdminController extends Controller
     {
         $tenant = $this->findTenant($user_id);
 
+        if ($tenant->is_approved) {
+            return $this->successResponse('User already approved', ['user' => $tenant]);
+        }
+
         $tenant->update(['is_approved' => true]);
 
         return $this->successResponse('User approved successfully', ['user' => $tenant->fresh()]);
@@ -23,6 +27,10 @@ class AdminController extends Controller
     public function revokeUserApproval(int $user_id)
     {
         $tenant = $this->findTenant($user_id);
+
+        if (! $tenant->is_approved) {
+            return $this->successResponse('User approval is already revoked', ['user' => $tenant]);
+        }
 
         $tenant->update(['is_approved' => false]);
 

@@ -17,13 +17,13 @@ Route::get('/', function () {
 });
 
 Route::group([
-    'middleware' => [OnlyAdminAllowed::class, 'ability:admin'],
+    'middleware' => [OnlyAdminAllowed::class, 'auth:sanctum', 'ability:manage-users'],
 ], function () {
-    Route::patch('/approve-user/{user_id}', [AdminController::class, 'approveUser']);
-    Route::patch('/revoke-user-approval/{user_id}', [AdminController::class, 'revokeUserApproval']);
+    Route::put('/admin/approve-user/{user_id}', [AdminController::class, 'approveUser']);
+    Route::put('/admin/revoke-user-approval/{user_id}', [AdminController::class, 'revokeUserApproval']);
 });
 
-Route::post('/admin/logout', [AuthController::class, 'adminLogout'])->middleware('ability:admin');
+Route::post('/admin/logout', [AuthController::class, 'adminLogout'])->middleware(['auth:sanctum', 'ability:manage-users']);
 Route::post('/logout', [AuthController::class, 'userLogout'])->middleware('auth:sanctum');
 
 Route::group(['middleware' => APIGuest::class], function () {
@@ -37,7 +37,7 @@ Route::post('/likes', [LikeController::class, 'store']);
 Route::delete('/likes/{id}', [LikeController::class, 'destroy']);
 
 Route::post('/{tenant_id}/comments', [CommentController::class, 'store']);
-Route::patch('/{tenant_id}/comments/{post_id}', [CommentController::class, 'update']);
+Route::put('/{tenant_id}/comments/{post_id}', [CommentController::class, 'update']);
 Route::delete('/{tenant_id}/comments/{post_id}', [CommentController::class, 'destroy']);
 
 Route::group(['middleware' => [
@@ -49,9 +49,9 @@ Route::group(['middleware' => [
     Route::get('/{tenant_id}/posts', [PostController::class, 'index']);
     Route::get('/{tenant_id}/posts/{post_id}', [PostController::class, 'show']);
     Route::post('/{tenant_id}/posts', [PostController::class, 'store']);
-    Route::patch('/{tenant_id}/posts/{post_id}', [PostController::class, 'update']);
+    Route::put('/{tenant_id}/posts/{post_id}', [PostController::class, 'update']);
     Route::delete('/{tenant_id}/posts/{post_id}', [PostController::class, 'destroy']);
 
     Route::post('/{tenant_id}/blogs/edit', [BlogController::class, 'store']);
-    Route::patch('/{tenant_id}/blogs', [BlogController::class, 'destroy']);
+    Route::put('/{tenant_id}/blogs', [BlogController::class, 'destroy']);
 });

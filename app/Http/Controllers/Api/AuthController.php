@@ -104,7 +104,7 @@ class AuthController extends Controller
             $admin = Admin::where('email', $request->email)->first();
 
             $token = $this->cleanToken(
-                $admin->createToken($admin->email)->plainTextToken
+                $admin->createToken($admin->email, ['manage-users'])->plainTextToken
             );
 
             return $this->successResponse('Login successful', [
@@ -131,9 +131,9 @@ class AuthController extends Controller
             }
 
             event(new Registered($admin));
-            Auth::login($admin);
+            Auth::guard('admin')->login($admin);
 
-            $token = $admin->createToken('ADMIN API TOKEN', ['admin'])->plainTextToken;
+            $token = $admin->createToken('ADMIN API TOKEN', ['manage-users'])->plainTextToken;
             $token = $this->cleanToken($token);
 
             return $this->successResponse("Admin registration successful", [
@@ -145,12 +145,12 @@ class AuthController extends Controller
         }
     }
 
-    public function adminLogout()
+    public function adminLogout(Request $request)
     {
         try {
-            $user = Auth::guard('admin')->user();
+            $admin = $request->user();
 
-            $user->tokens()->delete();
+            $admin->tokens()->delete();
 
             return $this->successResponse('Logout succesful');
         } catch (\Exception $exception) {
