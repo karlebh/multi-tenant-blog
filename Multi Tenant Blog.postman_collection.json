@@ -1,0 +1,1720 @@
+{
+	"info": {
+		"_postman_id": "ede69ecb-3716-42ad-beb8-dc175d195d13",
+		"name": "Multi Tenant Blog",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34356572",
+		"_collection_link": "https://galactic-desert-331940.postman.co/workspace/New-Team-Workspace~e09e4683-1010-4b5f-8d3c-c0a80d02b217/collection/34356572-ede69ecb-3716-42ad-beb8-dc175d195d13?action=share&source=collection_link&creator=34356572"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Authentication",
+					"item": [
+						{
+							"name": "register",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"John Doe\",\r\n  \"email\": \"johndoe@example.com\",\r\n  \"password\": \"strongpassword123\",\r\n  \"password_confirmation\": \"strongpassword123\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apiUrl}}/register",
+									"host": [
+										"{{apiUrl}}"
+									],
+									"path": [
+										"register"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"name\": \"John Doe\",\r\n  \"email\": \"johndoe@example.com\",\r\n  \"password\": \"strongpassword123\",\r\n  \"password_confirmation\": \"strongpassword123\"\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{apiUrl}}/register",
+											"host": [
+												"{{apiUrl}}"
+											],
+											"path": [
+												"register"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Host",
+											"value": "127.0.0.1:8000"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.3.9"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 07 Apr 2025 22:31:31 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": true,\n    \"message\": \"Registration successful\",\n    \"data\": {\n        \"token\": \"OHUh8PnxV7tXFhqA0mn03yOBQFijbUx8q0iqLzy0dc994699\",\n        \"user\": {\n            \"name\": \"John Doe\",\n            \"email\": \"johndoe@example.com\",\n            \"profile_photo\": null,\n            \"updated_at\": \"2025-04-07T22:31:30.000000Z\",\n            \"created_at\": \"2025-04-07T22:31:30.000000Z\",\n            \"id\": 13\n        }\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "login",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"johndoe@example.com\",\r\n  \"password\": \"strongpassword123\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apiUrl}}/login",
+									"host": [
+										"{{apiUrl}}"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"email\": \"johndoe@example.com\",\r\n  \"password\": \"strongpassword123\"\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{apiUrl}}/login",
+											"host": [
+												"{{apiUrl}}"
+											],
+											"path": [
+												"login"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Host",
+											"value": "127.0.0.1:8000"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.3.9"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 07 Apr 2025 23:01:52 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": true,\n    \"message\": \"Login successful\",\n    \"data\": {\n        \"token\": \"WqeLZIFLRWGRKKnvzCzqgdNQyiURRpcIxIGoNIDeff06b07e\",\n        \"user\": {\n            \"id\": 1,\n            \"name\": \"John Doe\",\n            \"email\": \"johndoe@example.com\",\n            \"email_verified_at\": null,\n            \"is_approved\": 0,\n            \"profile_photo\": null,\n            \"created_at\": \"2025-04-07T23:01:29.000000Z\",\n            \"updated_at\": \"2025-04-07T23:01:29.000000Z\"\n        }\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "logout",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "WMbY9pXFLbgNsZfspiRirdEYFuTDVDdQDNjnxmz46891d4cb",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{apiUrl}}/logout",
+									"host": [
+										"{{apiUrl}}"
+									],
+									"path": [
+										"logout"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{apiUrl}}/logout",
+											"host": [
+												"{{apiUrl}}"
+											],
+											"path": [
+												"logout"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Host",
+											"value": "127.0.0.1:8000"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.3.9"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 07 Apr 2025 22:46:47 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": true,\n    \"message\": \"Logout succesful\",\n    \"data\": []\n}"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Authentication",
+					"item": [
+						{
+							"name": "login",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"janedoe@example.com\",\r\n  \"password\": \"strongpassword123\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apiUrl}}/admin/login",
+									"host": [
+										"{{apiUrl}}"
+									],
+									"path": [
+										"admin",
+										"login"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"email\": \"janedoe@example.com\",\r\n  \"password\": \"strongpassword123\"\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{apiUrl}}/admin/login",
+											"host": [
+												"{{apiUrl}}"
+											],
+											"path": [
+												"admin",
+												"login"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Host",
+											"value": "127.0.0.1:8000"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.3.9"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 08 Apr 2025 21:17:01 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": true,\n    \"message\": \"Login successful\",\n    \"data\": {\n        \"token\": \"2ek0REw4jpflq7CagcrdUGYkeC1CM3F76W9Wg01G13b3adb0\",\n        \"admin\": {\n            \"id\": 4,\n            \"name\": \"Jane Doe\",\n            \"email\": \"janedoe@example.com\",\n            \"email_verified_at\": null,\n            \"profile_photo\": null,\n            \"created_at\": \"2025-04-08T21:12:15.000000Z\",\n            \"updated_at\": \"2025-04-08T21:12:15.000000Z\"\n        }\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "register",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Jane Doe\",\r\n  \"email\": \"janedoe@example.com\",\r\n  \"password\": \"strongpassword123\",\r\n  \"password_confirmation\": \"strongpassword123\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apiUrl}}/admin/register",
+									"host": [
+										"{{apiUrl}}"
+									],
+									"path": [
+										"admin",
+										"register"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"name\": \"Jane Doe\",\r\n  \"email\": \"janedoe@example.com\",\r\n  \"password\": \"strongpassword123\",\r\n  \"password_confirmation\": \"strongpassword123\"\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{apiUrl}}/admin/register",
+											"host": [
+												"{{apiUrl}}"
+											],
+											"path": [
+												"admin",
+												"register"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Host",
+											"value": "127.0.0.1:8000"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.3.9"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 07 Apr 2025 22:35:15 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": true,\n    \"message\": \"Admin registration successful\",\n    \"data\": {\n        \"token\": \"ez5WdR9JGaeBljo8dnL6P1QguaQfN1QmKwhIkZF9d5d8e143\",\n        \"admin\": {\n            \"name\": \"Jane Doe\",\n            \"email\": \"janedoe@example.com\",\n            \"profile_photo\": null,\n            \"updated_at\": \"2025-04-07T22:35:15.000000Z\",\n            \"created_at\": \"2025-04-07T22:35:15.000000Z\",\n            \"id\": 27\n        }\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "logout",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": [
+								{
+									"name": "success",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{apiUrl}}/admin/logout",
+											"host": [
+												"{{apiUrl}}"
+											],
+											"path": [
+												"admin",
+												"logout"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Host",
+											"value": "127.0.0.1:8000"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										},
+										{
+											"key": "X-Powered-By",
+											"value": "PHP/8.3.9"
+										},
+										{
+											"key": "Cache-Control",
+											"value": "no-cache, private"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 08 Apr 2025 21:47:26 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": true,\n    \"message\": \"Logout succesful\",\n    \"data\": []\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "approve user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "RT545uKbvhVzrK14JLOtGFK1Ndp9zihZvwX7kG5N09810aa4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{apiUrl}}/admin/approve-user/5",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"admin",
+								"approve-user",
+								"5"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "already approved",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{apiUrl}}/admin/approve-user/20",
+									"host": [
+										"{{apiUrl}}"
+									],
+									"path": [
+										"admin",
+										"approve-user",
+										"20"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.9"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 08 Apr 2025 21:23:10 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"User already approved\",\n    \"data\": {\n        \"user\": {\n            \"id\": 20,\n            \"name\": \"Ms. Aglae Boyle III\",\n            \"email\": \"anita.corwin@example.org\",\n            \"email_verified_at\": \"2025-04-07T23:11:55.000000Z\",\n            \"is_approved\": 1,\n            \"profile_photo\": null,\n            \"created_at\": \"2025-04-07T23:11:59.000000Z\",\n            \"updated_at\": \"2025-04-08T21:21:36.000000Z\"\n        }\n    }\n}"
+						},
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{apiUrl}}/admin/approve-user/5",
+									"host": [
+										"{{apiUrl}}"
+									],
+									"path": [
+										"admin",
+										"approve-user",
+										"5"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.9"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 08 Apr 2025 21:22:48 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"User approved successfully\",\n    \"data\": {\n        \"user\": {\n            \"id\": 5,\n            \"name\": \"Bette Gislason\",\n            \"email\": \"lenora47@example.com\",\n            \"email_verified_at\": \"2025-04-07T23:11:53.000000Z\",\n            \"is_approved\": 1,\n            \"profile_photo\": null,\n            \"created_at\": \"2025-04-07T23:11:55.000000Z\",\n            \"updated_at\": \"2025-04-08T21:22:48.000000Z\"\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "revoke approval",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "2ek0REw4jpflq7CagcrdUGYkeC1CM3F76W9Wg01G13b3adb0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{apiUrl}}/admin/revoke-user-approval/5",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"admin",
+								"revoke-user-approval",
+								"5"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{apiUrl}}/admin/revoke-user-approval/5",
+									"host": [
+										"{{apiUrl}}"
+									],
+									"path": [
+										"admin",
+										"revoke-user-approval",
+										"5"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.9"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 08 Apr 2025 21:18:07 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"User approval revoked successfully\",\n    \"data\": {\n        \"user\": {\n            \"id\": 5,\n            \"name\": \"Bette Gislason\",\n            \"email\": \"lenora47@example.com\",\n            \"email_verified_at\": \"2025-04-07T23:11:53.000000Z\",\n            \"is_approved\": 0,\n            \"profile_photo\": null,\n            \"created_at\": \"2025-04-07T23:11:55.000000Z\",\n            \"updated_at\": \"2025-04-08T21:18:07.000000Z\"\n        }\n    }\n}"
+						},
+						{
+							"name": "already revoked",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{apiUrl}}/admin/revoke-user-approval/5",
+									"host": [
+										"{{apiUrl}}"
+									],
+									"path": [
+										"admin",
+										"revoke-user-approval",
+										"5"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.9"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 08 Apr 2025 21:18:27 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"User approval is already revoked\",\n    \"data\": {\n        \"user\": {\n            \"id\": 5,\n            \"name\": \"Bette Gislason\",\n            \"email\": \"lenora47@example.com\",\n            \"email_verified_at\": \"2025-04-07T23:11:53.000000Z\",\n            \"is_approved\": 0,\n            \"profile_photo\": null,\n            \"created_at\": \"2025-04-07T23:11:55.000000Z\",\n            \"updated_at\": \"2025-04-08T21:18:07.000000Z\"\n        }\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Post",
+			"item": [
+				{
+					"name": "store",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "0QOxHkKZkfc0mYAmfplUIuJ8Y6vEEGmIFPOiUYRz68e483eb",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Introducing Laravel 11",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "Laravel 11 brings exciting new features and improvements for modern PHP development.",
+									"type": "text"
+								},
+								{
+									"key": "files[]",
+									"type": "file",
+									"src": "postman-cloud:///1f015075-9c9f-4f10-8b83-f1dd7382776d"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{apiUrl}}/24/posts",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"24",
+								"posts"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"title\": \"Introducing Laravel 11\",\r\n  \"content\": \"Laravel 11 brings exciting new features and improvements for modern PHP development.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apiUrl}}/24/posts",
+									"host": [
+										"{{apiUrl}}"
+									],
+									"path": [
+										"24",
+										"posts"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.9"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 09 Apr 2025 05:53:33 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"Post created succesfully\",\n    \"data\": {\n        \"post\": {\n            \"user_id\": 24,\n            \"title\": \"Introducing Laravel 11\",\n            \"content\": \"Laravel 11 brings exciting new features and improvements for modern PHP development.\",\n            \"updated_at\": \"2025-04-09T05:53:33.000000Z\",\n            \"created_at\": \"2025-04-09T05:53:33.000000Z\",\n            \"id\": 16,\n            \"files\": [],\n            \"tenant_id\": 24\n        }\n    }\n}"
+						},
+						{
+							"name": "success with file",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "Introducing Laravel 11",
+											"type": "text"
+										},
+										{
+											"key": "content",
+											"value": "Laravel 11 brings exciting new features and improvements for modern PHP development.",
+											"type": "text"
+										},
+										{
+											"key": "files[]",
+											"type": "file",
+											"src": "postman-cloud:///1f015075-9c9f-4f10-8b83-f1dd7382776d"
+										}
+									],
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apiUrl}}/24/posts",
+									"host": [
+										"{{apiUrl}}"
+									],
+									"path": [
+										"24",
+										"posts"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.9"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 09 Apr 2025 05:56:30 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"Post created succesfully\",\n    \"data\": {\n        \"post\": {\n            \"user_id\": 24,\n            \"title\": \"Introducing Laravel 11\",\n            \"content\": \"Laravel 11 brings exciting new features and improvements for modern PHP development.\",\n            \"updated_at\": \"2025-04-09T05:56:29.000000Z\",\n            \"created_at\": \"2025-04-09T05:56:29.000000Z\",\n            \"id\": 17,\n            \"files\": [\n                \"uploads/DghMLf6wEx-23-12-2024.PNG\"\n            ],\n            \"tenant_id\": 24\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "0QOxHkKZkfc0mYAmfplUIuJ8Y6vEEGmIFPOiUYRz68e483eb",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-type",
+								"value": "multipart/form-data",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Introducing Laravel 11",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "Laravel 11 brings exciting new features and improvements for modern PHP development.",
+									"type": "text"
+								},
+								{
+									"key": "files[]",
+									"type": "file",
+									"src": "postman-cloud:///1f015075-9c9f-4f10-8b83-f1dd7382776d"
+								},
+								{
+									"key": "files[]",
+									"type": "file",
+									"src": "postman-cloud:///1efe2110-f5cd-4c00-b2bb-c6bba985571e"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{apiUrl}}/24/posts/17",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"24",
+								"posts",
+								"17"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-type",
+										"value": "multipart/form-data",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "Introducing Laravel 11",
+											"type": "text"
+										},
+										{
+											"key": "content",
+											"value": "Laravel 11 brings exciting new features and improvements for modern PHP development.",
+											"type": "text"
+										},
+										{
+											"key": "files[]",
+											"type": "file",
+											"src": "postman-cloud:///1f015075-9c9f-4f10-8b83-f1dd7382776d"
+										},
+										{
+											"key": "files[]",
+											"type": "file",
+											"src": "postman-cloud:///1efe2110-f5cd-4c00-b2bb-c6bba985571e"
+										}
+									],
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apiUrl}}/24/posts/17",
+									"host": [
+										"{{apiUrl}}"
+									],
+									"path": [
+										"24",
+										"posts",
+										"17"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.9"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 09 Apr 2025 06:23:03 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"Post updated succesfully\",\n    \"data\": {\n        \"post\": {\n            \"id\": 17,\n            \"user_id\": 24,\n            \"title\": \"Introducing Laravel 11\",\n            \"content\": \"Laravel 11 brings exciting new features and improvements for modern PHP development.\",\n            \"files\": [\n                \"uploads/XbAngRSFX2-23-12-2024.PNG\",\n                \"uploads/q7fnEvASfk-register-page.PNG\",\n                \"uploads/lRCRIpDbWl-23-12-2024.PNG\",\n                \"uploads/XfMYL7zWNW-register-page.PNG\",\n                \"uploads/mIKt9Wuuxe-23-12-2024.PNG\",\n                \"uploads/aQxjSTmbBa-register-page.PNG\"\n            ],\n            \"created_at\": \"2025-04-09T05:56:29.000000Z\",\n            \"updated_at\": \"2025-04-09T06:23:03.000000Z\"\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "show",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "0QOxHkKZkfc0mYAmfplUIuJ8Y6vEEGmIFPOiUYRz68e483eb",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Introducing Laravel 11",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "Laravel 11 brings exciting new features and improvements for modern PHP development.",
+									"type": "text"
+								},
+								{
+									"key": "files[]",
+									"type": "file",
+									"src": "postman-cloud:///1f015075-9c9f-4f10-8b83-f1dd7382776d"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{apiUrl}}/24/posts/17",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"24",
+								"posts",
+								"17"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "Introducing Laravel 11",
+											"type": "text"
+										},
+										{
+											"key": "content",
+											"value": "Laravel 11 brings exciting new features and improvements for modern PHP development.",
+											"type": "text"
+										},
+										{
+											"key": "files[]",
+											"type": "file",
+											"src": "postman-cloud:///1f015075-9c9f-4f10-8b83-f1dd7382776d"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{apiUrl}}/24/posts/17",
+									"host": [
+										"{{apiUrl}}"
+									],
+									"path": [
+										"24",
+										"posts",
+										"17"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.9"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 09 Apr 2025 06:04:00 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"Post retrieved succesfully\",\n    \"data\": {\n        \"post\": {\n            \"id\": 17,\n            \"user_id\": 24,\n            \"title\": \"Introducing Laravel 11\",\n            \"content\": \"Laravel 11 brings exciting new features and improvements for modern PHP development.\",\n            \"files\": [\n                \"uploads/DghMLf6wEx-23-12-2024.PNG\"\n            ],\n            \"created_at\": \"2025-04-09T05:56:29.000000Z\",\n            \"updated_at\": \"2025-04-09T05:56:29.000000Z\"\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "0QOxHkKZkfc0mYAmfplUIuJ8Y6vEEGmIFPOiUYRz68e483eb",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Introducing Laravel 11",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "Laravel 11 brings exciting new features and improvements for modern PHP development.",
+									"type": "text"
+								},
+								{
+									"key": "files[]",
+									"type": "file",
+									"src": "postman-cloud:///1f015075-9c9f-4f10-8b83-f1dd7382776d"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{apiUrl}}/24/posts/13",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"24",
+								"posts",
+								"13"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "Introducing Laravel 11",
+											"type": "text"
+										},
+										{
+											"key": "content",
+											"value": "Laravel 11 brings exciting new features and improvements for modern PHP development.",
+											"type": "text"
+										},
+										{
+											"key": "files[]",
+											"type": "file",
+											"src": "postman-cloud:///1f015075-9c9f-4f10-8b83-f1dd7382776d"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{apiUrl}}/24/posts/13",
+									"host": [
+										"{{apiUrl}}"
+									],
+									"path": [
+										"24",
+										"posts",
+										"13"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.9"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 09 Apr 2025 06:24:17 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"Post deleted succesfully\",\n    \"data\": []\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Comment",
+			"item": []
+		},
+		{
+			"name": "Blog",
+			"item": [
+				{
+					"name": "blog details",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "0QOxHkKZkfc0mYAmfplUIuJ8Y6vEEGmIFPOiUYRz68e483eb",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{apiUrl}}/24/blogs",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"24",
+								"blogs"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{apiUrl}}/24/blogs",
+									"host": [
+										"{{apiUrl}}"
+									],
+									"path": [
+										"24",
+										"blogs"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.9"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 09 Apr 2025 06:37:28 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"All blog details\",\n    \"data\": {\n        \"blog\": [\n            {\n                \"id\": 23,\n                \"user_id\": 24,\n                \"name\": \"Jane Smith's blog\",\n                \"description\": \"A cool description\",\n                \"files\": null,\n                \"created_at\": \"2025-04-09T05:46:24.000000Z\",\n                \"updated_at\": \"2025-04-09T05:46:24.000000Z\"\n            }\n        ],\n        \"tenant\": {\n            \"id\": 24,\n            \"name\": \"Jane Smith\",\n            \"email\": \"janesmith@example.org\",\n            \"email_verified_at\": null,\n            \"is_approved\": 1,\n            \"profile_photo\": null,\n            \"created_at\": \"2025-04-09T05:46:23.000000Z\",\n            \"updated_at\": \"2025-04-09T05:46:23.000000Z\"\n        },\n        \"posts\": {\n            \"current_page\": 1,\n            \"data\": [\n                {\n                    \"id\": 17,\n                    \"user_id\": 24,\n                    \"title\": \"Introducing Laravel 11\",\n                    \"content\": \"Laravel 11 brings exciting new features and improvements for modern PHP development.\",\n                    \"files\": [\n                        \"uploads/XbAngRSFX2-23-12-2024.PNG\",\n                        \"uploads/q7fnEvASfk-register-page.PNG\",\n                        \"uploads/lRCRIpDbWl-23-12-2024.PNG\",\n                        \"uploads/XfMYL7zWNW-register-page.PNG\",\n                        \"uploads/mIKt9Wuuxe-23-12-2024.PNG\",\n                        \"uploads/aQxjSTmbBa-register-page.PNG\"\n                    ],\n                    \"created_at\": \"2025-04-09T05:56:29.000000Z\",\n                    \"updated_at\": \"2025-04-09T06:23:03.000000Z\"\n                },\n                {\n                    \"id\": 16,\n                    \"user_id\": 24,\n                    \"title\": \"Introducing Laravel 11\",\n                    \"content\": \"Laravel 11 brings exciting new features and improvements for modern PHP development.\",\n                    \"files\": [],\n                    \"created_at\": \"2025-04-09T05:53:33.000000Z\",\n                    \"updated_at\": \"2025-04-09T05:53:33.000000Z\"\n                },\n                {\n                    \"id\": 15,\n                    \"user_id\": 24,\n                    \"title\": \"Introducing Laravel 11\",\n                    \"content\": \"Laravel 11 brings exciting new features and improvements for modern PHP development.\",\n                    \"files\": [],\n                    \"created_at\": \"2025-04-09T05:52:29.000000Z\",\n                    \"updated_at\": \"2025-04-09T05:52:29.000000Z\"\n                },\n                {\n                    \"id\": 14,\n                    \"user_id\": 24,\n                    \"title\": \"Introducing Laravel 11\",\n                    \"content\": \"Laravel 11 brings exciting new features and improvements for modern PHP development.\",\n                    \"files\": [],\n                    \"created_at\": \"2025-04-09T05:51:45.000000Z\",\n                    \"updated_at\": \"2025-04-09T05:51:45.000000Z\"\n                }\n            ],\n            \"first_page_url\": \"http://127.0.0.1:8000/api/24/blogs?page=1\",\n            \"from\": 1,\n            \"last_page\": 1,\n            \"last_page_url\": \"http://127.0.0.1:8000/api/24/blogs?page=1\",\n            \"links\": [\n                {\n                    \"url\": null,\n                    \"label\": \"&laquo; Previous\",\n                    \"active\": false\n                },\n                {\n                    \"url\": \"http://127.0.0.1:8000/api/24/blogs?page=1\",\n                    \"label\": \"1\",\n                    \"active\": true\n                },\n                {\n                    \"url\": null,\n                    \"label\": \"Next &raquo;\",\n                    \"active\": false\n                }\n            ],\n            \"next_page_url\": null,\n            \"path\": \"http://127.0.0.1:8000/api/24/blogs\",\n            \"per_page\": 20,\n            \"prev_page_url\": null,\n            \"to\": 4,\n            \"total\": 4\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "0QOxHkKZkfc0mYAmfplUIuJ8Y6vEEGmIFPOiUYRz68e483eb",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{apiUrl}}/24/blogs",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"24",
+								"blogs"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://127.0.0.1:8000",
+			"type": "string"
+		},
+		{
+			"key": "apiUrl",
+			"value": "http://127.0.0.1:8000/api",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "WqeLZIFLRWGRKKnvzCzqgdNQyiURRpcIxIGoNIDeff06b07e",
+			"type": "string"
+		},
+		{
+			"key": "adminToken",
+			"value": "MrvKZlrefgapfEbZIvLRVHpMETTJMxSwacBvuGNtf8dd610d",
+			"type": "string"
+		}
+	]
+}

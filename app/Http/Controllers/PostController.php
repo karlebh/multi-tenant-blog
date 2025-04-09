@@ -65,14 +65,16 @@ class PostController extends Controller
 
         $processedFiles = $this->processFiles($request);
 
-        $mergedFiles = array_merge(
-            $post->files ?? [],
-            $processedFiles
-        );
+        if (! empty($processedFiles)) {
+            $mergedFiles = array_merge(
+                $post->files ?? [],
+                $processedFiles
+            );
 
-        $post->update([
-            'files' => $mergedFiles
-        ]);
+            $post->update([
+                'files' => $mergedFiles
+            ]);
+        }
 
         return redirect()->route('posts.show', [$tenant, $post])
             ->with('success', 'Post updated successfully');

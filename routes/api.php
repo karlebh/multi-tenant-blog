@@ -49,9 +49,9 @@ Route::group(['middleware' => [
     Route::get('/{tenant_id}/posts', [PostController::class, 'index']);
     Route::get('/{tenant_id}/posts/{post_id}', [PostController::class, 'show']);
     Route::post('/{tenant_id}/posts', [PostController::class, 'store']);
-    Route::put('/{tenant_id}/posts/{post_id}', [PostController::class, 'update']);
+    Route::post('/{tenant_id}/posts/{post_id}', [PostController::class, 'update']);
     Route::delete('/{tenant_id}/posts/{post_id}', [PostController::class, 'destroy']);
 
-    Route::post('/{tenant_id}/blogs/edit', [BlogController::class, 'store']);
-    Route::put('/{tenant_id}/blogs', [BlogController::class, 'destroy']);
+    Route::get('/{tenant_id}/blogs', [BlogController::class, 'index']);
+    Route::post('/{tenant_id}/blogs/{blog_id}', [BlogController::class, 'update']);
 });

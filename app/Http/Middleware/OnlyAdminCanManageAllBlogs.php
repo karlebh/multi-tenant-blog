@@ -17,11 +17,16 @@ class OnlyAdminCanManageAllBlogs
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (auth()->user() instanceof User && auth()->id() !== $request->tenant->id) {
+        $tenantId = $request->tenant ? $request->tenant->id : $request->tenant_id;
+
+        if (auth()->user() instanceof User && auth()->id() !== (int) $tenantId) {
 
             if ($request->expectsJson()) {
                 return response()->json([
-                    'message' => 'Unauthorized. Only admins can access this resource.',
+                    'message' => 'Unauthorized. Only admins can manage all blogs.',
+                    'tenant_it' => $request->tenant_id,
+                    'user' => $request->user()->load('blog'),
+                    'user_id' => auth()->id(),
                 ], 403);
             }
 

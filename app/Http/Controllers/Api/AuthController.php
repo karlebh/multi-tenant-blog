@@ -42,6 +42,8 @@ class AuthController extends Controller
             $token = $user->createToken('API TOKEN')->plainTextToken;
             $token = $this->cleanToken($token);
 
+            $user->blog()->create(['name' => $user->name . "'s blog"]);
+
             return $this->successResponse("Registration successful", [
                 'token' => $token,
                 'user' => $user,

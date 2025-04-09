@@ -20,6 +20,10 @@ class Post extends Model
         'files',
     ];
 
+    protected $hidden = [
+        'blog_id',
+    ];
+
     protected function casts(): array
     {
         return [

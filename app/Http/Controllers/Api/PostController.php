@@ -6,11 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CreatePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
-use App\Models\User;
 use App\Traits\MethodTrait;
 use App\Traits\ResponseTrait;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class PostController extends Controller
 {
@@ -31,7 +28,6 @@ class PostController extends Controller
 
     public function store(CreatePostRequest $request, int $tenant_id)
     {
-        // return $tenant_id;
         try {
             $tenant =  $this->findTenant($tenant_id);
 
@@ -39,6 +35,7 @@ class PostController extends Controller
 
             $post = Post::create([
                 'user_id' => $tenant->id,
+                'blog_id' => $tenant->blog->id,
                 'title' => $requestData['title'],
                 'content' => $requestData['content'],
             ]);
@@ -51,17 +48,24 @@ class PostController extends Controller
 
             $post->update(['files' => $processedFiles]);
 
-            return $this->successResponse('Post created succesfully', ['post' => $post]);
+            return $this->successResponse(
+                'Post created succesfully',
+                ['post' => array_merge($post->toArray(), ['tenant_id' => $post->user_id])]
+            );
         } catch (\Exception $exception) {
             return $this->serverErrorResponse('Server error', $exception);
         }
     }
 
-    public function show(int $id, int $tenant_id)
+    public function show(int $tenant_id, int $id)
     {
         try {
             $result = $this->findTenantAndPost($tenant_id, $id);
-            $this->successResponse('Post retrieved succesfully', ['post' => $result['post']]);
+
+            return $this->successResponse(
+                'Post retrieved succesfully',
+                ['post' => $result['post']]
+            );
         } catch (\Exception $exception) {
             return $this->serverErrorResponse('Server error', $exception);
         }
@@ -76,16 +80,18 @@ class PostController extends Controller
 
             $processedFiles = $this->processFiles($request);
 
-            $mergedFiles = array_merge(
-                $post->files ?? [],
-                $processedFiles
-            );
+            if (! empty($processedFiles)) {
+                $mergedFiles = array_merge(
+                    $result['post']->files ?? [],
+                    $processedFiles
+                );
 
-            $result['post']->update([
-                'files' => $mergedFiles
-            ]);
+                $result['post']->update([
+                    'files' => $mergedFiles
+                ]);
+            }
 
-            $this->successResponse('Post updated succesfully', ['post' => $result['post']->fresh()]);
+            return  $this->successResponse('Post updated succesfully', ['post' => $result['post']->fresh()]);
         } catch (\Exception $exception) {
             return $this->serverErrorResponse('Server error', $exception);
         }

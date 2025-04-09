@@ -42,7 +42,7 @@ class AuthController extends Controller
 
         $user->blog()->create(['name' => $user->name . "'s blog"]);
 
-        return redirect()->route('blogs.index', ['tenant' => $user]);
+        return redirect()->route('blogs.index', ['tenant' => $user->load('blog')]);
     }
 
     public function userLogin(UserLoginRequest $request)

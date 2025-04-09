@@ -40,9 +40,11 @@ class BlogController extends Controller
 
         $processedFile = $this->processFiles($request);
 
-        $blog->update([
-            'files' => $processedFile,
-        ]);
+        if (! empty($processedFile)) {
+            $blog->update([
+                'files' => $processedFile,
+            ]);
+        }
 
         return redirect()->route('blogs.index', $tenant->id)->with('success', 'Blog details updated successfully');
     }
