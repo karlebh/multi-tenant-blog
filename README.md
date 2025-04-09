@@ -19,3 +19,5 @@ To run please follow these instructions:
 9. run `php artisan migrate --seed` to migrate and seed the database.
 10. run `php artisan serve`.
 11. Go to the given address in the terminal in your browser.
+
+The api collection is included in the root directory as `Multi Tenant Blog.postman_collection.json`
