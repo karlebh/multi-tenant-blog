@@ -1538,7 +1538,472 @@
 		},
 		{
 			"name": "Comment",
-			"item": []
+			"item": [
+				{
+					"name": "create comment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"user_id\": 1,\r\n  \"post_id\": 5,\r\n  \"content\": \"This is a comment on the post.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{apiUrl}}/comments",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"comments"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "user comment",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"user_id\": 1,\r\n  \"post_id\": 5,\r\n  \"content\": \"This is a comment on the post.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apiUrl}}/comments",
+									"host": [
+										"{{apiUrl}}"
+									],
+									"path": [
+										"comments"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.9"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 09 Apr 2025 18:14:42 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"Comment created successfully\",\n    \"data\": {\n        \"comment\": {\n            \"user_id\": 1,\n            \"post_id\": 5,\n            \"content\": \"This is a comment on the post.\",\n            \"updated_at\": \"2025-04-09T18:14:41.000000Z\",\n            \"created_at\": \"2025-04-09T18:14:41.000000Z\",\n            \"id\": 1\n        }\n    }\n}"
+						},
+						{
+							"name": "guest comment",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"post_id\": 5,\r\n  \"content\": \"This is a comment on the post.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apiUrl}}/comments",
+									"host": [
+										"{{apiUrl}}"
+									],
+									"path": [
+										"comments"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.9"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 09 Apr 2025 18:18:11 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"Comment created successfully\",\n    \"data\": {\n        \"comment\": {\n            \"post_id\": 5,\n            \"content\": \"This is a comment on the post.\",\n            \"updated_at\": \"2025-04-09T18:18:11.000000Z\",\n            \"created_at\": \"2025-04-09T18:18:11.000000Z\",\n            \"id\": 7\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "update comment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"post_id\": 5,\r\n  \"content\": \"This is a comment on the post. 1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{apiUrl}}/comments/2",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"comments",
+								"2"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"user_id\": 1,\r\n  \"post_id\": 5,\r\n  \"content\": \"This is a comment on the post. 1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apiUrl}}/comments/1",
+									"host": [
+										"{{apiUrl}}"
+									],
+									"path": [
+										"comments",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.9"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 09 Apr 2025 18:24:45 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"comment updated successfully\",\n    \"data\": {\n        \"comment\": {\n            \"id\": 1,\n            \"post_id\": 5,\n            \"user_id\": 1,\n            \"name\": null,\n            \"content\": \"This is a comment on the post. 1\",\n            \"files\": null,\n            \"created_at\": \"2025-04-09T18:14:41.000000Z\",\n            \"updated_at\": \"2025-04-09T18:24:45.000000Z\"\n        }\n    }\n}"
+						},
+						{
+							"name": "can not modify guest comments",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"post_id\": 5,\r\n  \"content\": \"This is a comment on the post. 1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apiUrl}}/comments/2",
+									"host": [
+										"{{apiUrl}}"
+									],
+									"path": [
+										"comments",
+										"2"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.9"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 09 Apr 2025 18:25:30 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": false,\n    \"message\": \"Can not modify guest comments\",\n    \"data\": []\n}"
+						}
+					]
+				},
+				{
+					"name": "delete comment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "hZWPiLfehiXhWyqugPozyGcfZ2Zg5vYyaqaVvgIR12ee39d3",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"post_id\": 5,\r\n  \"content\": \"This is a comment on the post. 1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{apiUrl}}/comments/12",
+							"host": [
+								"{{apiUrl}}"
+							],
+							"path": [
+								"comments",
+								"12"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success, only admin and blog owner",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"post_id\": 5,\r\n  \"content\": \"This is a comment on the post. 1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apiUrl}}/comments/12",
+									"host": [
+										"{{apiUrl}}"
+									],
+									"path": [
+										"comments",
+										"12"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.9"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 09 Apr 2025 20:23:30 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"comment deleted successfully\",\n    \"data\": []\n}"
+						}
+					]
+				}
+			]
 		},
 		{
 			"name": "Blog",
@@ -1551,7 +2016,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "0QOxHkKZkfc0mYAmfplUIuJ8Y6vEEGmIFPOiUYRz68e483eb",
+									"value": "OK6NFqi9qYjcgQJkQkK8VOs9udCuQyTEILQOrsXzaf2224ba",
 									"type": "string"
 								}
 							]
@@ -1565,12 +2030,12 @@
 							}
 						],
 						"url": {
-							"raw": "{{apiUrl}}/24/blogs",
+							"raw": "{{apiUrl}}/21/blogs",
 							"host": [
 								"{{apiUrl}}"
 							],
 							"path": [
-								"24",
+								"21",
 								"blogs"
 							]
 						}
@@ -1588,12 +2053,12 @@
 									}
 								],
 								"url": {
-									"raw": "{{apiUrl}}/24/blogs",
+									"raw": "{{apiUrl}}/21/blogs",
 									"host": [
 										"{{apiUrl}}"
 									],
 									"path": [
-										"24",
+										"21",
 										"blogs"
 									]
 								}
@@ -1620,7 +2085,7 @@
 								},
 								{
 									"key": "Date",
-									"value": "Wed, 09 Apr 2025 06:37:28 GMT"
+									"value": "Wed, 09 Apr 2025 17:37:30 GMT"
 								},
 								{
 									"key": "Content-Type",
@@ -1632,7 +2097,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"status\": true,\n    \"message\": \"All blog details\",\n    \"data\": {\n        \"blog\": [\n            {\n                \"id\": 23,\n                \"user_id\": 24,\n                \"name\": \"Jane Smith's blog\",\n                \"description\": \"A cool description\",\n                \"files\": null,\n                \"created_at\": \"2025-04-09T05:46:24.000000Z\",\n                \"updated_at\": \"2025-04-09T05:46:24.000000Z\"\n            }\n        ],\n        \"tenant\": {\n            \"id\": 24,\n            \"name\": \"Jane Smith\",\n            \"email\": \"janesmith@example.org\",\n            \"email_verified_at\": null,\n            \"is_approved\": 1,\n            \"profile_photo\": null,\n            \"created_at\": \"2025-04-09T05:46:23.000000Z\",\n            \"updated_at\": \"2025-04-09T05:46:23.000000Z\"\n        },\n        \"posts\": {\n            \"current_page\": 1,\n            \"data\": [\n                {\n                    \"id\": 17,\n                    \"user_id\": 24,\n                    \"title\": \"Introducing Laravel 11\",\n                    \"content\": \"Laravel 11 brings exciting new features and improvements for modern PHP development.\",\n                    \"files\": [\n                        \"uploads/XbAngRSFX2-23-12-2024.PNG\",\n                        \"uploads/q7fnEvASfk-register-page.PNG\",\n                        \"uploads/lRCRIpDbWl-23-12-2024.PNG\",\n                        \"uploads/XfMYL7zWNW-register-page.PNG\",\n                        \"uploads/mIKt9Wuuxe-23-12-2024.PNG\",\n                        \"uploads/aQxjSTmbBa-register-page.PNG\"\n                    ],\n                    \"created_at\": \"2025-04-09T05:56:29.000000Z\",\n                    \"updated_at\": \"2025-04-09T06:23:03.000000Z\"\n                },\n                {\n                    \"id\": 16,\n                    \"user_id\": 24,\n                    \"title\": \"Introducing Laravel 11\",\n                    \"content\": \"Laravel 11 brings exciting new features and improvements for modern PHP development.\",\n                    \"files\": [],\n                    \"created_at\": \"2025-04-09T05:53:33.000000Z\",\n                    \"updated_at\": \"2025-04-09T05:53:33.000000Z\"\n                },\n                {\n                    \"id\": 15,\n                    \"user_id\": 24,\n                    \"title\": \"Introducing Laravel 11\",\n                    \"content\": \"Laravel 11 brings exciting new features and improvements for modern PHP development.\",\n                    \"files\": [],\n                    \"created_at\": \"2025-04-09T05:52:29.000000Z\",\n                    \"updated_at\": \"2025-04-09T05:52:29.000000Z\"\n                },\n                {\n                    \"id\": 14,\n                    \"user_id\": 24,\n                    \"title\": \"Introducing Laravel 11\",\n                    \"content\": \"Laravel 11 brings exciting new features and improvements for modern PHP development.\",\n                    \"files\": [],\n                    \"created_at\": \"2025-04-09T05:51:45.000000Z\",\n                    \"updated_at\": \"2025-04-09T05:51:45.000000Z\"\n                }\n            ],\n            \"first_page_url\": \"http://127.0.0.1:8000/api/24/blogs?page=1\",\n            \"from\": 1,\n            \"last_page\": 1,\n            \"last_page_url\": \"http://127.0.0.1:8000/api/24/blogs?page=1\",\n            \"links\": [\n                {\n                    \"url\": null,\n                    \"label\": \"&laquo; Previous\",\n                    \"active\": false\n                },\n                {\n                    \"url\": \"http://127.0.0.1:8000/api/24/blogs?page=1\",\n                    \"label\": \"1\",\n                    \"active\": true\n                },\n                {\n                    \"url\": null,\n                    \"label\": \"Next &raquo;\",\n                    \"active\": false\n                }\n            ],\n            \"next_page_url\": null,\n            \"path\": \"http://127.0.0.1:8000/api/24/blogs\",\n            \"per_page\": 20,\n            \"prev_page_url\": null,\n            \"to\": 4,\n            \"total\": 4\n        }\n    }\n}"
+							"body": "{\n    \"status\": true,\n    \"message\": \"All blog details\",\n    \"data\": {\n        \"blog\": [\n            {\n                \"id\": 21,\n                \"user_id\": 21,\n                \"name\": \"John Doe's blog\",\n                \"description\": \"A cool description\",\n                \"file\": null,\n                \"created_at\": \"2025-04-09T17:29:17.000000Z\",\n                \"updated_at\": \"2025-04-09T17:29:17.000000Z\"\n            }\n        ],\n        \"tenant\": {\n            \"id\": 21,\n            \"name\": \"John Doe\",\n            \"email\": \"johndoe@example.com\",\n            \"email_verified_at\": null,\n            \"is_approved\": 1,\n            \"profile_photo\": null,\n            \"created_at\": \"2025-04-09T17:29:16.000000Z\",\n            \"updated_at\": \"2025-04-09T17:29:16.000000Z\"\n        },\n        \"posts\": {\n            \"current_page\": 1,\n            \"data\": [\n                {\n                    \"id\": 3,\n                    \"user_id\": 21,\n                    \"title\": \"Necessitatibus qui iusto non voluptas neque non.\",\n                    \"content\": \"Nobis optio quidem consequatur rerum occaecati architecto aut. Sequi iusto et quia rem ex quia dolores doloremque. Illo provident non quasi dicta quia sequi.\\n\\nQuis ad maiores delectus eum vero. Et dolorum alias dolor voluptates sed. Enim quam doloribus qui ut sapiente sit nesciunt. Hic voluptas enim sequi quibusdam.\\n\\nCorporis similique nam autem veritatis accusantium facilis repellendus. Quaerat nulla quos eveniet. Consequatur sed sint libero id. Rerum id perferendis veritatis voluptatem tempore voluptatem quia ut.\",\n                    \"files\": null,\n                    \"created_at\": \"2025-04-09T17:37:02.000000Z\",\n                    \"updated_at\": \"2025-04-09T17:37:02.000000Z\"\n                },\n                {\n                    \"id\": 8,\n                    \"user_id\": 21,\n                    \"title\": \"Ea minima sint error dolorem aut.\",\n                    \"content\": \"Quasi cum inventore voluptatem aliquam quo fuga vero. Dolore nobis at quidem deserunt. Saepe dolorem expedita et maxime et similique est. Architecto odit accusantium eligendi cum similique dolorem.\\n\\nVero animi reiciendis quas sit autem qui cupiditate. Eum labore ea voluptatibus illum ab soluta neque. Dolores repellat asperiores qui facere omnis consequatur quis deleniti.\\n\\nEx suscipit et omnis aliquam earum fuga possimus. Porro odit at voluptatem omnis ut. Consequuntur animi non aperiam et quia nemo eveniet. Quas voluptas sunt est eum debitis.\",\n                    \"files\": null,\n                    \"created_at\": \"2025-04-09T17:37:02.000000Z\",\n                    \"updated_at\": \"2025-04-09T17:37:02.000000Z\"\n                },\n                {\n                    \"id\": 9,\n                    \"user_id\": 21,\n                    \"title\": \"Blanditiis et eum fuga eos omnis.\",\n                    \"content\": \"Quibusdam similique ducimus nihil sit numquam unde. Beatae inventore sit aut totam ut est illo quaerat. Voluptates rerum ducimus velit. Doloribus nostrum quisquam enim dolor.\\n\\nImpedit soluta cupiditate ad alias sapiente eveniet fugit. Qui qui tenetur vero aspernatur debitis. Placeat reprehenderit debitis consectetur dolore alias et. Esse pariatur officiis et consequuntur sit minima. Architecto veritatis et consequatur veniam voluptatem et sit.\\n\\nId fuga sed molestias temporibus quasi ut. Pariatur ullam explicabo perferendis ut recusandae error non enim. Optio odio nisi modi inventore ipsum. Eos amet corrupti unde voluptatem minus aut.\",\n                    \"files\": null,\n                    \"created_at\": \"2025-04-09T17:37:02.000000Z\",\n                    \"updated_at\": \"2025-04-09T17:37:02.000000Z\"\n                },\n                {\n                    \"id\": 1,\n                    \"user_id\": 21,\n                    \"title\": \"Ab fugit odio error velit.\",\n                    \"content\": \"Incidunt voluptate tenetur accusamus repellat. Fugit dolores vitae vero maiores veritatis. Accusamus ut eius voluptas illum aut at. Eligendi velit voluptatum quis pariatur repellat.\\n\\nDeleniti consequuntur ut dolores. Omnis quaerat consequatur laudantium mollitia eligendi illo et.\\n\\nPlaceat aspernatur eos quisquam aut necessitatibus accusantium. Exercitationem dolorem dolor aut ratione. Rerum in dolores facere voluptas aut error dicta. Natus officia voluptatem eos incidunt. Iste unde voluptatum quis porro asperiores quam quo.\",\n                    \"files\": null,\n                    \"created_at\": \"2025-04-09T17:37:01.000000Z\",\n                    \"updated_at\": \"2025-04-09T17:37:01.000000Z\"\n                }\n            ],\n            \"first_page_url\": \"http://127.0.0.1:8000/api/21/blogs?page=1\",\n            \"from\": 1,\n            \"last_page\": 1,\n            \"last_page_url\": \"http://127.0.0.1:8000/api/21/blogs?page=1\",\n            \"links\": [\n                {\n                    \"url\": null,\n                    \"label\": \"&laquo; Previous\",\n                    \"active\": false\n                },\n                {\n                    \"url\": \"http://127.0.0.1:8000/api/21/blogs?page=1\",\n                    \"label\": \"1\",\n                    \"active\": true\n                },\n                {\n                    \"url\": null,\n                    \"label\": \"Next &raquo;\",\n                    \"active\": false\n                }\n            ],\n            \"next_page_url\": null,\n            \"path\": \"http://127.0.0.1:8000/api/21/blogs\",\n            \"per_page\": 20,\n            \"prev_page_url\": null,\n            \"to\": 4,\n            \"total\": 4\n        }\n    }\n}"
 						}
 					]
 				},
@@ -1649,7 +2114,7 @@
 								}
 							]
 						},
-						"method": "GET",
+						"method": "POST",
 						"header": [
 							{
 								"key": "Accept",
@@ -1657,18 +2122,192 @@
 								"type": "text"
 							}
 						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Cool New Blog",
+									"type": "text"
+								},
+								{
+									"key": "files[]",
+									"type": "file",
+									"src": "postman-cloud:///1efe20ad-b2c7-4950-91fe-a94e0470dc08"
+								}
+							]
+						},
 						"url": {
-							"raw": "{{apiUrl}}/24/blogs",
+							"raw": "{{apiUrl}}/24/blogs/23",
 							"host": [
 								"{{apiUrl}}"
 							],
 							"path": [
 								"24",
-								"blogs"
+								"blogs",
+								"23"
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "success with file",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "Cool New Blog",
+											"type": "text"
+										},
+										{
+											"key": "file",
+											"type": "file",
+											"src": "postman-cloud:///1efe2210-c8de-4a40-819c-7bc9e8d7209a"
+										},
+										{
+											"key": "description",
+											"value": "Cool description",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{apiUrl}}/21/blogs",
+									"host": [
+										"{{apiUrl}}"
+									],
+									"path": [
+										"21",
+										"blogs"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.9"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 09 Apr 2025 17:44:46 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"Blog details updated successfully\",\n    \"data\": {\n        \"blog\": {\n            \"id\": 21,\n            \"user_id\": 21,\n            \"name\": \"Cool New Blog\",\n            \"description\": \"Cool description\",\n            \"file\": \"uploads/PO6hzGKMzR-Capture.PNG\",\n            \"created_at\": \"2025-04-09T17:29:17.000000Z\",\n            \"updated_at\": \"2025-04-09T17:44:46.000000Z\"\n        }\n    }\n}"
+						},
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "Cool New Blog new 1",
+											"type": "text"
+										},
+										{
+											"key": "file",
+											"type": "file",
+											"src": "postman-cloud:///1efe2210-c8de-4a40-819c-7bc9e8d7209a",
+											"disabled": true
+										},
+										{
+											"key": "description",
+											"value": "Cool description new 1",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{apiUrl}}/21/blogs",
+									"host": [
+										"{{apiUrl}}"
+									],
+									"path": [
+										"21",
+										"blogs"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.3.9"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 09 Apr 2025 17:46:37 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"Blog details updated successfully\",\n    \"data\": {\n        \"blog\": {\n            \"id\": 21,\n            \"user_id\": 21,\n            \"name\": \"Cool New Blog new 1\",\n            \"description\": \"Cool description new 1\",\n            \"file\": \"\",\n            \"created_at\": \"2025-04-09T17:29:17.000000Z\",\n            \"updated_at\": \"2025-04-09T17:45:50.000000Z\"\n        }\n    }\n}"
+						}
+					]
 				}
 			]
 		}

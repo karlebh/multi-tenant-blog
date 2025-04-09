@@ -35,7 +35,7 @@ Route::group(['middleware' => APIGuest::class], function () {
 
 Route::post('/comments', [CommentController::class, 'store']);
 Route::put('/comments/{comment_id}', [CommentController::class, 'update']);
-Route::delete('/comments/{comment_id}', [CommentController::class, 'destroy'])->middleware('ability:manage-users');
+Route::delete('/comments/{comment_id}', [CommentController::class, 'destroy'])->middleware(['auth:sanctum', 'ability:manage-users']);
 
 Route::group(['middleware' => [
     'auth:sanctum',

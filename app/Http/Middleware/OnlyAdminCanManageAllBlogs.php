@@ -20,8 +20,8 @@ class OnlyAdminCanManageAllBlogs
         $tenantId = $request->tenant ? $request->tenant->id : $request->tenant_id;
 
         if (
-            auth()->user() instanceof User
-            && auth()->id() !== (int) $tenantId
+            $request->user() instanceof User
+            && $request->user()->id !== (int) $tenantId
         ) {
 
             if ($request->expectsJson()) {
@@ -29,9 +29,6 @@ class OnlyAdminCanManageAllBlogs
                     'message' => 'Unauthorized. Only admins can manage all blogs.',
                 ], 403);
             }
-
-            dd($request->user());
-
             return redirect()->route('blogs.index', $request->user());
         }
 
