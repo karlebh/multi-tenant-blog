@@ -10,14 +10,7 @@ class Blog extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'name', 'files', 'description'];
-
-    protected function casts(): array
-    {
-        return [
-            'files' => 'array',
-        ];
-    }
+    protected $fillable = ['user_id', 'name', 'file', 'description'];
 
     public function posts(): HasMany
     {

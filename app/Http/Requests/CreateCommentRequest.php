@@ -22,7 +22,7 @@ class CreateCommentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id'   => ['required', 'exists:users,id'],
+            'user_id'   => ['nullable', 'exists:users,id'],
             'post_id'   => ['required', 'exists:posts,id'],
             'content'   => ['required', 'string'],
             'files.*'     => ['nullable', 'file', 'mimes:jpg,png,pdf,docx', 'max:2048'],

@@ -21,12 +21,6 @@ class BlogController extends Controller
     {
         $tenant = $this->findTenant($tenant_id);
 
-        $blog = Blog::where('user_id', $tenant_id)->get();
-
-        if (! $blog) {
-            $this->notFoundResponse('Blog not found');
-        }
-
         $posts =  Post::where('user_id', $tenant_id)->latest()->paginate(20);
 
         if (! $posts) {
@@ -34,32 +28,26 @@ class BlogController extends Controller
         }
 
         return $this->successResponse('All blog details', [
-            'blog' => $blog,
+            'blog' => $tenant->blog,
             'tenant' => $tenant,
             'posts' => $posts,
         ]);
     }
 
-    public function update(UpdateBlogRequest $request, int $tenant_id, int $blog_id)
+    public function update(UpdateBlogRequest $request, int $tenant_id)
     {
         $tenant = $this->findTenant($tenant_id);
 
-        $blog = Blog::find($blog_id);
+        $tenant->blog->update($request->validated());
 
-        if (! $blog) {
-            $this->notFoundResponse('Blog not found');
-        }
-
-        $blog->update($request->validated());
-
-        $processedFile = $this->processFiles($request);
+        $processedFile = $this->processFile($request);
 
         if (! empty($processedFile)) {
-            $blog->update([
-                'files' => $processedFile,
+            $tenant->blog->update([
+                'file' => $processedFile,
             ]);
         }
 
-        return $this->successResponse('Blog details updated successfully', ['blog' => $blog->fresh()]);
+        return $this->successResponse('Blog details updated successfully', ['blog' => $tenant->blog->fresh()]);
     }
 }

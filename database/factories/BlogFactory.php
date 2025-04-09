@@ -19,7 +19,7 @@ class BlogFactory extends Factory
         return [
             'user_id' => \App\Models\User::factory(),
             'name' => $this->faker->sentence(4),
-            'files' => json_encode([$this->faker->imageUrl(), $this->faker->imageUrl()]),
+            'file' => $this->faker->imageUrl(),
             'description' => $this->faker->paragraph(3),
         ];
     }

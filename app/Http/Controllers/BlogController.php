@@ -38,11 +38,11 @@ class BlogController extends Controller
     {
         $blog->update($request->validated());
 
-        $processedFile = $this->processFiles($request);
+        $processedFile = $this->processFile($request);
 
         if (! empty($processedFile)) {
             $blog->update([
-                'files' => $processedFile,
+                'file' => $processedFile,
             ]);
         }
 

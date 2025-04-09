@@ -33,18 +33,14 @@ Route::group(['middleware' => APIGuest::class], function () {
     Route::post('/admin/register', [AuthController::class, 'adminRegister']);
 });
 
-Route::post('/likes', [LikeController::class, 'store']);
-Route::delete('/likes/{id}', [LikeController::class, 'destroy']);
-
-Route::post('/{tenant_id}/comments', [CommentController::class, 'store']);
-Route::put('/{tenant_id}/comments/{post_id}', [CommentController::class, 'update']);
-Route::delete('/{tenant_id}/comments/{post_id}', [CommentController::class, 'destroy']);
+Route::post('/comments', [CommentController::class, 'store']);
+Route::put('/comments/{comment_id}', [CommentController::class, 'update']);
+Route::delete('/comments/{comment_id}', [CommentController::class, 'destroy'])->middleware('ability:manage-users');
 
 Route::group(['middleware' => [
     'auth:sanctum',
     CantManageBlogUnlessApproved::class,
     OnlyAdminCanManageAllBlogs::class,
-    // 'ability:admin'
 ]], function () {
     Route::get('/{tenant_id}/posts', [PostController::class, 'index']);
     Route::get('/{tenant_id}/posts/{post_id}', [PostController::class, 'show']);
@@ -53,5 +49,5 @@ Route::group(['middleware' => [
     Route::delete('/{tenant_id}/posts/{post_id}', [PostController::class, 'destroy']);
 
     Route::get('/{tenant_id}/blogs', [BlogController::class, 'index']);
-    Route::post('/{tenant_id}/blogs/{blog_id}', [BlogController::class, 'update']);
+    Route::post('/{tenant_id}/blogs', [BlogController::class, 'update']);
 });

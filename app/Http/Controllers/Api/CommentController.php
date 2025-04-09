@@ -17,11 +17,9 @@ class CommentController extends Controller
 {
     use ResponseTrait, MethodTrait;
 
-    public function store(CreateCommentRequest $request, $tenant_id)
+    public function store(CreateCommentRequest $request)
     {
         try {
-            $tenant =  $this->findTenant($tenant_id);
-
             $comment = Comment::create($request->validated());
 
             if (! $comment) {
@@ -34,20 +32,29 @@ class CommentController extends Controller
         }
     }
 
-    public function update(UpdateCommentRequest $request, int $tenant_id, $comment_id)
+    public function update(UpdateCommentRequest $request, int $comment_id)
     {
         try {
-            $result = $this->findTenantAndComment($tenant_id, $comment_id);
+            $comment = Comment::find($comment_id);
 
-            $result['comment']->update($request->validated());
+            if (! $comment) {
+                return $this->badRequestResponse("Comment not found");
+            }
+
+            if (! $comment->user_id) {
+                return $this->badRequestResponse("Can not modify guest comments");
+            }
+
+            $comment->update($request->validated());
 
             return $this->successResponse('comment updated successfully', [
-                'comment' => $result['comment']->fresh()
+                'comment' => $comment->fresh()
             ]);
         } catch (\Exception $exception) {
             return $this->serverErrorResponse('Server error', $exception);
         }
     }
+
     public function delete(int $tenant_id, int $comment_id)
     {
         $result = $this->findTenantAndComment($tenant_id, $comment_id);

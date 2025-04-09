@@ -13,13 +13,13 @@ trait MethodTrait
 {
     use ResponseTrait;
 
-    public function processFiles(Request $request): array
+    public function processFiles(Request $request)
     {
         $request->validate([
             'files.*' => [
                 'required',
                 'file',
-                'mimes:txt,csv,png,jpg,jpeg,gif,pdf',
+                'mimes:png,jpg,jpeg,gif',
                 'max:30720'
             ],
         ]);
@@ -38,6 +38,27 @@ trait MethodTrait
         }
 
         return $storedFiles;
+    }
+
+    public function processFile(Request $request)
+    {
+        $request->validate([
+            'file.*' => [
+                'required',
+                'file',
+                'mimes:png,jpg,jpeg,gif',
+                'max:30720'
+            ],
+        ]);
+
+        $file = $request->file;
+
+        if ($request->hasFile('file')) {
+            $fileName = Str::random(10) . '-' . $file->getClientOriginalName();
+            $path = $file->storeAs("uploads", str_replace(' ', '', $fileName), 'public');
+
+            return $path;
+        }
     }
 
     private function findTenant(int $tenant_id)
