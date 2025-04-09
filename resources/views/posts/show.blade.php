@@ -35,26 +35,6 @@
                         <a href="{{ route('posts.edit', [$tenant, $post]) }}" class="text-blue-600 underline">edit
                             post</a>
 
-                        <div class="inline space-x-7">
-
-                            <form action="{{ route('likes.toggle', $post) }}" method="POST" style="display: inline;">
-                                @csrf
-                                <input type="hidden" name="likeable_id" value="{{ $post->id }}">
-                                <input type="hidden" name="likeable_type" value="{{ $post::class }}">
-                                <button type="submit">Like</button>
-                            </form>
-
-                            @auth
-                                <form action="{{ route('likes.toggle', $post) }}" method="POST" style="display: inline;">
-                                    @csrf
-                                    <input type="hidden" name="likeable_id" value="{{ $post->id }}">
-                                    <input type="hidden" name="likeable_type" value="{{ $post::class }}">
-                                    <button type="submit">Unlike</button>
-                                </form>
-                            @endauth
-
-                        </div>
-
                     </div>
 
                     @if ($post->files)

@@ -18,6 +18,7 @@
 
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
+
             @if (!Auth::user()->is_approved)
                 <div class="bg-red-600">
                     <div
@@ -28,6 +29,7 @@
                     </div>
                 </div>
             @endif
+
             @include('layouts.navigation')
 
             {{-- @if (session('message'))

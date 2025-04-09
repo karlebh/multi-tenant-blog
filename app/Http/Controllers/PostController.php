@@ -12,15 +12,6 @@ class PostController extends Controller
 {
     use MethodTrait;
 
-    public function index(User $tenant)
-    {
-        $posts = Post::with(['comments', 'likes', 'user'])
-            ->where('user_id', $tenant->id)
-            ->paginate(10);
-
-        return view('posts.index', compact('posts'));
-    }
-
     public function create(User $tenant)
     {
         return view('posts.create', compact('tenant'));

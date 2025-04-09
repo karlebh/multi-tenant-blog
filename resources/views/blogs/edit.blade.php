@@ -26,16 +26,14 @@
                             <x-input-error :messages="$errors->get('description')" class="mt-2" />
                         </div>
 
-                        @if ($blog->files)
+                        @if ($blog->file)
                             <div class="my-4">
                                 <x-input-label for="files" :value="__('Files')" />
                                 <div class="grid grid-cols-2 gap-4 mt-4">
-                                    @foreach ($blog->files as $file)
-                                        <div>
-                                            <img src="{{ asset('storage/' . $file) }}" alt="Uploaded file"
-                                                class="w-full rounded shadow">
-                                        </div>
-                                    @endforeach
+                                    <div>
+                                        <img src="{{ asset('storage/' . $blog->file) }}" alt="Uploaded file"
+                                            class="w-full rounded shadow">
+                                    </div>
                                 </div>
                             </div>
                         @endif
@@ -43,9 +41,9 @@
 
                         <!-- File Upload -->
                         <div class="mt-4">
-                            <x-input-label for="files" :value="__('Upload File')" />
-                            <input id="files" class="block mt-1 w-full" type="file" name="files[]" />
-                            <x-input-error :messages="$errors->get('files')" class="mt-2" />
+                            <x-input-label for="file" :value="__('Upload File')" />
+                            <input id="file" class="block mt-1 w-full" type="file" name="file" />
+                            <x-input-error :messages="$errors->get('file')" class="mt-2" />
                         </div>
 
                         <div class="flex items-center justify-end mt-6">

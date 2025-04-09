@@ -5,7 +5,9 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
+use App\Http\Middleware\AdminCanSeeAllPosts;
 use App\Http\Middleware\CantManageBlogUnlessApproved;
+use App\Http\Middleware\MultiGuardAuth;
 use App\Http\Middleware\OnlyAdminAllowed;
 use App\Http\Middleware\OnlyAdminCanManageAllBlogs;
 use Illuminate\Support\Facades\Route;
@@ -17,12 +19,6 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
-
-// Route::middleware('auth')->group(function () {
-//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-// });
 
 Route::group([
     'middleware' => [OnlyAdminAllowed::class, 'auth:admin'],
@@ -44,17 +40,14 @@ Route::group([
     Route::post('/user/login', [AuthController::class, 'userLogin'])->name('user.login');
 });
 
-Route::group([
-    'middleware' => [
-        OnlyAdminCanManageAllBlogs::class,
-        // 'auth',
-        'auth:admin'
-    ]
-], function () {
-    Route::get('/{tenant}/blogs', [BlogController::class, 'index'])->name('blogs.index');
-    Route::get('/{tenant}/posts', [PostController::class, 'index'])->name('posts.index');
+Route::get('/{tenant}/blogs', [BlogController::class, 'index'])->name('blogs.index')->middleware(MultiGuardAuth::class);
 
-    Route::middleware(CantManageBlogUnlessApproved::class)->group(function () {
+Route::middleware([
+    CantManageBlogUnlessApproved::class,
+    MultiGuardAuth::class,
+    OnlyAdminCanManageAllBlogs::class,
+])
+    ->group(function () {
         Route::get('/{tenant}/blogs/{blog}/edit', [BlogController::class, 'edit'])->name('blogs.edit');
         Route::put('/{tenant}/blogs/{blog}', [BlogController::class, 'update'])->name('blogs.update');
 
@@ -65,7 +58,6 @@ Route::group([
         Route::put('/{tenant}/posts/{post}', [PostController::class, 'update'])->name('posts.update');
         Route::delete('/{tenant}/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
     });
-});
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('user.logout')->middleware('auth');
 Route::post('/admin/logout', [AuthController::class, 'adminLogout'])->name('admin.logout')->middleware('auth:admin');

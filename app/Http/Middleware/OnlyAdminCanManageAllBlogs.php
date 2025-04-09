@@ -6,6 +6,7 @@ use App\Models\Admin;
 use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class OnlyAdminCanManageAllBlogs
@@ -20,18 +21,19 @@ class OnlyAdminCanManageAllBlogs
         $tenantId = $request->tenant ? $request->tenant->id : $request->tenant_id;
 
         if (
-            $request->user() instanceof User
-            && $request->user()->id !== (int) $tenantId
+            ($request->user() instanceof User && $request->user()->id === (int) $tenantId)
+            || ($request->user() instanceof Admin)
         ) {
 
-            if ($request->expectsJson()) {
-                return response()->json([
-                    'message' => 'Unauthorized. Only admins can manage all blogs.',
-                ], 403);
-            }
-            return redirect()->route('blogs.index', $request->user());
+            return $next($request);
         }
 
-        return $next($request);
+        if ($request->expectsJson()) {
+            return response()->json([
+                'message' => 'Unauthorized. Only admins can manage all blogs.',
+            ], 403);
+        }
+
+        return redirect()->route('blogs.index', $request->user());
     }
 }

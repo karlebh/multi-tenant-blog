@@ -13,19 +13,6 @@ class PostController extends Controller
 {
     use MethodTrait, ResponseTrait;
 
-    public function index(int $tenant_id)
-    {
-        try {
-            $tenant = $this->findTenant($tenant_id);
-
-            $posts = Post::with(['comments', 'likes', 'user'])->where('user_id', $tenant->id)->paginate(10);
-
-            return $this->successResponse('Post retrieved succesfully', ['posts' => $posts]);
-        } catch (\Exception $exception) {
-            return $this->serverErrorResponse('Server error', $exception);
-        }
-    }
-
     public function store(CreatePostRequest $request, int $tenant_id)
     {
         try {

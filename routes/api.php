@@ -42,7 +42,6 @@ Route::group(['middleware' => [
     CantManageBlogUnlessApproved::class,
     OnlyAdminCanManageAllBlogs::class,
 ]], function () {
-    Route::get('/{tenant_id}/posts', [PostController::class, 'index']);
     Route::get('/{tenant_id}/posts/{post_id}', [PostController::class, 'show']);
     Route::post('/{tenant_id}/posts', [PostController::class, 'store']);
     Route::post('/{tenant_id}/posts/{post_id}', [PostController::class, 'update']);

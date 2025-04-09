@@ -41,6 +41,8 @@
                         <p class="text-center text-gray-600">No user yet.</p>
                     @endforelse
 
+                    {{ $users->links() }}
+
                 </div>
             </div>
         </div>
