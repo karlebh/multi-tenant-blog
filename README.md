@@ -9,7 +9,7 @@ To run please follow these instructions:
 5. run `npm install` command.
 6. cd into the folder in a separate terminal and run `npm run dev`.
 7. Create a `.env` from from the `.env.example` file.
-8. set up the database. You can use sqlite by replacing the database configurations with
+8. set up the database. You can use sqlite by replacing the database configurations with the below after creating the `database.sqlite` in the database directory.
 
 ```
     DB_CONNECTION=sqlite
